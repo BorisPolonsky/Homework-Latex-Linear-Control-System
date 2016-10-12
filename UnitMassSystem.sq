@@ -1,0 +1,15 @@
+functions
+{@
+function [pos,velocity]=StateTransform(F,pos_0,v_0)
+velocity=v_0+F;
+pos=pos_0+v_0+1/2*F;
+
+function DisplayMotion(X)
+pos=0
+v=0
+for i=1:size(X,2)
+	[pos,v]=StateTransform(X(1,i),pos,v)
+	plot(i,pos,'o')
+	plot(i,v,'x')
+end
+@}
