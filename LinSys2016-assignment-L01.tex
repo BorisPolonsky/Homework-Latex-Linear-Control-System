@@ -1,0 +1,342 @@
+%%Very Important!!! Please input your personal code and name here!
+%%请在此输入你的个人代码和姓名（请用拼音，不要用汉字）。非常重要！！
+\def\mycode{}
+\def\myname{}
+\def\myid{}
+
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+\documentclass{ctexart}\pagestyle{empty}
+\usepackage{latexsym,afterpage,amssymb,amsmath,amsthm,amsbsy,amsopn,amstext,amsxtra,amscd,color,multicol,bm,calc,lastpage,listings,indentfirst,ifpdf,CJK,CJKnumb,fancybox,fancyhdr,float,subfigure,times,longtable}%常用宏包
+\usepackage{everypage,lastpage}
+\usepackage{graphicx,hyperref}
+\usepackage[left=3cm,right=3cm]{geometry}
+\graphicspath{{./}{fig/}}
+
+\pdfinfo{
+/Keywords (Linear Systems Theory)
+/Title (-MyTitle-)
+/Subject (-Assignment-)
+/Creator (-YourCode-)
+/Author (\myname)
+/Producer (\mycode)
+/StudentID (\myid)
+}
+
+%%Load the package attachfile for attaching files in pdf files
+\usepackage{attachfile}
+\newcommand{\myattach}[2][\relax]{
+\IfFileExists{#2}{
+\attachfile{#2}{\ifx\relax#1\fbox{#2}\else\fbox{#1}\fi}
+}{}
+}
+
+
+%%Load the package listings for typesetting program codes
+\usepackage{listings,color}
+\lstdefinelanguage{sysquake}{
+keywords={include,import,const,decl,return,if,else,elseif,for,while,switch,break,continue,goto,main},
+sensitive=true,commentstyle=\it\color{red},frame=TB,
+morecomment=[l]{//},morecomment=[s]{/*}{*/},numbers=left,numberstyle=\tiny,
+extendedchars=true,breaklines=true,
+}
+\lstset{language=sysquake}
+
+
+\parindent=0pt
+\newcounter{assignment}\setcounter{assignment}{000}
+\newcounter{exercise}\setcounter{exercise}{0}
+\def\exerciseskip{\vskip 0.6cm plus 0.3cm minus 0.3cm}
+\def\solutionskip{\vskip 1cm plus 0.5cm minus 0.5cm}
+\def\exercisewidth{0.8\textwidth}
+\def\solutionwidth{0.8\textwidth}
+\def\exercisecoloring{\color{blue}}
+\def\solutioncoloring{\color{red}}
+\def\textcoloring{\color{black}}
+
+\newenvironment{exercise}
+{\stepcounter{exercise}\centering\textbf{\large \sc \exercisecoloring Exercise \arabic{assignment}.\arabic{exercise}}\nopagebreak\\[-0.1ex] \hfill\hfill\ovalbox\bgroup\begin{minipage}{\exercisewidth}\exercisecoloring}
+{\end{minipage}\egroup\hfill\hfill\exerciseskip}
+
+\newenvironment{solution}
+{\centerline{\textbf{\large \sc \solutioncoloring \underline{Solution}}}\par \begingroup\textcoloring}
+{\hfill\hfill $\Box$ \endgroup\solutionskip}
+
+\def\mystar{{\color{red}$^\star$}}
+\def\mydag{{\color{red}$^{\dagger}$}}
+\newcommand\mylabel[2][]{\hypertarget{#2}{#1}}
+\newcommand\myref[2][\fbox{$\star$}]{\hyperlink{#2}{#1}}
+
+\def\mytitle{
+\begin{center}
+{\LARGE{Linear Systems Theory}} {
+    \Large \normalsize
+    \hspace*{12cm} Page \thepage\ of \pageref{LastPage}}\\
+    Questions with \mystar\ are not compulsory,
+    while questions with \mydag\ are compulsory.\\
+    You need to solve at least one question in each assignment.\\
+    The more questions you answer, the more points you gain.
+\end{center}
+}
+
+\AddEverypageHook{
+\fancyhf{}%
+\mytitle
+}
+
+
+%%---You may add your own definitions here---
+%%──你自己定义的命令可以放在这里──
+\def\R{\mathcal{R}}
+\def\Q{\mathcal{Q}}
+\def\C{\mathcal{C}}
+\def\F{\mathcal{F}}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+\begin{document}%
+\begin{CJK*}{GBK}{kai}
+%-------版面的线框用页眉元素表现--------
+%---第一页与众不同---
+\newsavebox{\firstpgframe}
+\sbox{\firstpgframe}{\parbox{157mm}{
+\begin{center}
+\begin{minipage}[t][153mm][t]{157mm}
+\makebox[4mm][l]{\fbox{\parbox[t][153mm][t]{157mm}{\ }}}
+\end{minipage}
+\end{center}
+}}
+\vspace*{-6mm}
+
+\newsavebox{\zdx}
+\sbox{\zdx}
+	{\parbox{412pt}{
+	\centering \CJKfamily{kai}
+代~码(Code)\underline{\makebox[20mm][c]{\mycode}}~学~号(ID)\underline{\makebox[30mm][c]{-\myid-}}~~~姓~名(Name)\underline{\makebox[30mm][c]{\myname}}
+
+\vspace{3mm}
+\dotfill{}装\dotfill{}订\dotfill{}线\dotfill{}(Gutter)\dotfill{}
+}}
+\setlength{\marginparsep}{-10mm}
+\reversemarginpar
+\marginpar{
+\parbox{10mm}{\vspace{3cm}
+\rotatebox[origin=c]{90}{
+\usebox{\zdx}
+}
+}}
+
+%%Attach files (tex file;source code;figures;data file;rar archive;etc.)
+%%请在此用命令\myattach{file}插入你的各种源文件（tex文件，源程序，图片文件，数据文件，压缩包，等等）
+\myattach{\jobname.tex}
+% \myattach{myprog01.sq}
+\vskip 1cm
+
+%%Main Text: Please provide your solutions here.
+%%正文：请在此查看你的作业，并填写你的答案。
+\begin{center}%
+\ovalbox{
+\begin{minipage}{0.8\textwidth}\centering%
+\textbf{Note that in all the excercises below, $F_{n}$ denotes the Fibonacci number\\ 
+satisfying $F_{n}=F_{n-1}+F_{n-2}$ with $F_{0}=0$ and $F_{1}=1$.}
+\end{minipage}
+}
+\end{center}
+\begin{exercise}%
+\begin{enumerate}
+\item 
+What are your motivations to attend this course?
+Do you have any ideas or suggestions for Prof. Ma?
+\item 
+Please use \LaTeX\ to typeset the most complex formula or equations you have seen before.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+ Please put your solution and/or program here ...
+ \newline 1:I guess a lot of smart figures will also attend this course and perhaps I can learn something useful from the instructor and the classmates. I've heard that we can actually learn something from Prof. Ma but it requires a lot of efforts.
+ \newline 2:The formula of Entropy:$$E=-\sum_{i=1}^{n}p_{i}\log_{2}{p_{i}}$$
+ %\lstinputlisting{myprog01.sq}
+\end{solution}
+
+\begin{exercise}%
+Prove at least three properties of Fibonacci numbers given in the course slides.
+\end{exercise}
+
+\begin{solution}
+ Please put your solution and/or program here ...
+ %\lstinputlisting{myprog01.sq}
+ \newline 1: $F_{1}F_{2}+F_{2}F_{3}+...+F_{2n-1}F_{2n}=F_{2n}^{2}$
+\newline proof:
+\newline for n=1, $F_{1}F_{2}=F_{2}^{2}$
+\newline assume n=k satisfies the original equation
+\newline for n=k+1
+\newline $F_{1}F_{2}+F_{2}F_{3}+...+F_{2k-1}F_{2k}+F_{2k}F_{2k+1}+F_{2k+1}F_{2k+2}$
+\newline $=F_{2k}^{2}+F_{2k}F_{2k+1}+F_{2k+1}F_{2k+2}$
+\newline $=F_{2k}^{2}+F_{2k}F_{2k+1}+F_{2k+1}(F_{2k+1}+F_{2k})$
+\newline $=F_{2k}^{2}+2F_{2k}F_{2k+1}+F_{2k+1}^{2}$
+\newline $=F_{2k+2}^{2}$
+\newline thus,
+\newline $F_{1}F_{2}+F_{2}F_{3}+...+F_{2n-1}F_{2n}=F_{2n}^{2}$
+\newline 2: $F_{1}F_{2}+F_{2}F_{3}+...+F_{2n}F_{2n+1}=F_{2n+1}^{2}-1$
+\newline proof:
+\newline for n=1, $F_{1}F_{2}+F_{2}F_{3}=F_{3}^{2}-1$
+\newline assume n=k satisfies the original equation
+\newline for n=k+1
+\newline $F_{1}F_{2}+F_{2}F_{3}+...+F_{2k}F_{2k+1}+F_{2k+1}F_{2k+2}+F_{2k+2}F_{2k+3}$
+\newline $=(F_{2k+1}^{2}-1)+F_{2k+1}F_{2k+2}+F_{2k+2}F_{2k+3}$
+\newline $=F_{2k+1}^{2}-1+F_{2k+1}F_{2k+2}+F_{2k+2}(F_{2k+2}+F_{2k+1})$
+\newline $=F_{2k+1}^{2}+F_{2k+2}^{2}+2F_{2k+1}F_{2k+2}-1$
+\newline $=(F_{2k+1}+F_{2k+2})^{2}-1$
+\newline $=F_{2k+3}^{2}-1$
+\newline thus,
+\newline $F_{1}F_{2}+F_{2}F_{3}+...+F_{2n}F_{2n+1}=F_{2n+1}^{2}-1$
+\newline 3: $F_{n}^{2}-F_{n-1}F_{n+1}=(-1)^{n-1}(n\geq 2)$
+\newline proof:
+\newline Assume $X_{n}=F_{n}^{2}-F_{n-1}F_{n+1}(n\geq 2)$
+\newline $X_{n+1}=F_{n+1}^{2}-F_{n}F_{n+2}$
+\newline $=F_{n+1}^{2}-F_{n}(F_{n+1}+F_{n})$
+\newline $=F_{n+1}^{2}-F_{n}^{2}-F_{n}F_{n+1}$
+\newline $=F_{n+1}^{2}-F_{n}^{2}-(F_{n+1}-F_{n-1})F_{n+1}$
+\newline $=-(F_{n}^{2}-F_{n-1}F_{n+1})=-X_{n}(n\geq 2)$
+\newline $X_{2}=F_{2}^{2}-F_{1}F_{3}=-1$
+\newline hence,
+\newline $X_{n}=F_{n}^{2}-F_{n-1}F_{n+1}=(-1)^{n-1}(n\geq 2)$
+\end{solution}
+
+
+\begin{exercise}%
+Try to fit $F_{n} (n=1,2,\cdots,N)$ with exponential function $f(n)=c_1 \exp {\alpha n}+c_2$. 
+Please develop one computational method to determine the corresponding fitting parameters and analyze the relationship between $N$ and fitting parameters when $N$ is 10,20,30,...100.\\
+\textbf{Hints:}You can get the logarithm form of $F_{n}$,and then use least square method, parameter estimation method or other curve fitting methods.\\
+\textbf{Demands: }
+\begin{enumerate}
+%     \item Can you deduce the mathematical general formula between $F_{n}$ and $n$?
+    \item Describe in detail how to find the value of $\alpha$ from the data of $F_{n} (n=1,2,\cdots,N)$. 
+    \item Implement your method with Sysquake, provide your program codes and show your running results.
+    \item Try to analyze the results and give the detailed discussion. Please think it over carefully.
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+ Please put your solution and/or program here ...
+ \newline 1:
+ $$\ln [F(n)-C_{2}]=\ln C_{1}+\alpha n$$
+assume $$x_{1}=\alpha$$ $$x_{2}=\ln C_{1}$$ $$y_{n}=\ln [F(n)-C_{2}]$$ 
+we got $$y_{n}=n x_{1}+x_{2}$$
+with n samples [$n$ $y_{n}$] from the plot we can obtain n formulas shown as below:
+$$y_{1}=x_{1}+x_{2}$$
+$$y_{2}=2 x_{1}+x_{2}$$
+...
+$$y_{n}=n x_{1}+x_{2}$$
+we convert these formulas into a matrix equation shown as below:
+$$\beta=Ax$$in which
+$$x^{T}=[x_{1}\ x_{2}]$$ $$\beta^{T}=[y_{1}\ y_{2}\ ...\ y_{n}]$$
+if $n>2$ then it's an Over Determined System. We can obtain the optimal solution by solving 
+$$A^{T}\beta=A^{T}Ax$$
+after we obtain the optimal $x^{*}=[x_{1}^{*}\ x_{2}^{*}]$
+we can obtain $\alpha^{*}$ and $c_{1}^{*}$ by applying
+$$\alpha^{*}=x_{1}$$$$C_{1}=e^{x_{2}}$$
+ps:I honestly don't know how to deal with $C_{2}$ properly. But for any given $C_{2}$,we can obtain optimal $c_{1}^{*}$ and $\alpha^{*}$ and the solution is unique as long as: 
+$$det(A^{T}A) \neq 0$$
+\newline 2:
+\newline Assume that $C_{2}=0$, find out $C_{1}$ and $\alpha$ with sysquake command:
+\newline We create a .sq file and implement some useful function to solve this problem. The content is shown below:
+\lstinputlisting{SysquakeTest.sq}
+We run the following command in command line:
+\newline ShowCase()
+\newline And we get the result:
+\newline alpha =
+    0.4689
+\newline C1 =
+    0.4883
+\newline alpha =
+    0.4782
+\newline C1 =
+    0.4665
+\newline alpha =
+    0.4799
+\newline C1 =
+    0.4599
+\newline alpha =
+    0.4804
+\newline C1 =
+    0.4566
+\newline alpha =
+    0.4807
+\newline C1 =
+    0.4547
+\newline alpha =
+    0.4809
+\newline C1 =
+    0.4534
+\newline alpha =
+     0.481
+\newline C1 =
+    0.4525
+\newline alpha =
+     0.481
+\newline C1 =
+    0.4518
+\newline alpha =
+    0.4811
+\newline C1 =
+    0.4513
+\newline alpha =
+    0.4811
+\newline C1 =
+    0.4509
+\newline Then we seperately run commands to see the approximation, in which the target function is shown in a curve and the discrete sample point are shown as crosses:
+\newline VisualizeSolution(10,0)
+\newline VisualizeSolution(100,20)
+\newline And we got two figures below:
+\newline
+\includegraphics[width=0.8\textwidth]{L01_Test1.png} 
+\newline Test1:A test with 100 sample points taken
+\newline
+\includegraphics[width=0.8\textwidth]{L01_Test2.png} 
+\newline Test2:A test with 10 sample points taken
+\newline 3:
+\newline From the results we can see that increasing the amount of samples does not affect the coefficient $C_{1}$ or $\alpha$ too much. And from the two graphical results we can see that with the the coefficient $C_{1}$ and $\alpha$ obtained, the target function satisfyingly approximates the set of discrete sample points from Fibonacci Sequence. 
+
+\end{solution}
+
+\begin{exercise}%
+For an $n\times n$ chessboard, a player starts from the origin (the left-bottom corner, denoted by $(0,0)$) and wants to explore the number of possible ways $S_{i,j}$ to reach any junction $(i,j)$.
+Suppose that the player can only move one step each time, either upward (e.g. from A to C) or rightward(e.g. from A to B).
+\includegraphics[width=0.8\textwidth]{figure1.jpg} 
+\begin{enumerate}
+    \item Can you determine the values of $S_{i,0}$ and $S_{0,j}$ ($i,j=1,2,\cdots,n$) ?
+    Can you determine the recursive formula for $S_{i,j}$? 
+    Can you figure out the relationship between $S_{n,n}$ and $n$? 
+    Show your results by method of induction or deduction.
+    \item \mystar
+    Discuss similar questions if the player can't move more than $m$ steps continuously in one direction. 
+    Try to discuss the following cases seperately: (a) $m=1$; (b) $m=2$; (c) $m=3$; (d) $m=4$; (e) Can you find any general patterns or laws for this problem?
+\end{enumerate}
+\end{exercise}
+\begin{solution}
+ Please put your solution and/or program here ...
+\newline 1:
+\newline$S_{i,0}=1$, $S_{0,j}=1$ $S_{i,j}=S_{i-1,j}+S_{i,j-1}$($i>0$ and $j>0$))
+\newline We display some $S_{i,j}$ below:
+$$\begin{matrix}
+1&1&1&1&1\\
+1&2&3&4&5\\
+1&3&6&10&15\\
+1&4&10&20&35\\
+1&5&15&35&70\\
+\end{matrix}$$
+We can see that it is just a rotated pascal triangle. 
+$S_{n,n}$ is the middle element of the $2n$ row in pascal triangle(Row numbers starts at 0). 
+So, we obtain
+$$S_{n,n}=C_{2n}^{n}=\frac{(2n)!}{n!n!}$$
+\newline 2:
+\newline for m=1,$S_{n,n}=2$($n>0$)
+ %\lstinputlisting{myprog01.sq}
+\end{solution}
+\end{CJK*}
+\end{document}
+
+
+

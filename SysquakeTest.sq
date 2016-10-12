@@ -1,0 +1,65 @@
+functions
+{@
+function ret=Fn(n)
+for i=0:n
+	switch i
+	case 0
+		ret=0;
+	case 1
+		ret=[0;1];
+	otherwise
+		ret=[ret;ret(i,1)+ret(i-1,1)];
+	end
+end
+ret=ret(n+1,1);
+
+function ret=ConstructA(n)
+for i=1:n;
+	if i==1
+		ret=[1,1];
+	else
+		ret=[ret;i,1];
+	end
+end
+
+function ret=ConstructBeta(n,C2)
+for i=1:n
+	switch i
+	case 1
+		ret=1;
+	case 2
+		ret=[1;1];
+	otherwise
+		ret=[ret;ret(i-1,1)+ret(i-2,1)];
+	end
+end
+for i=1:n
+	ret(i,1)=log(ret(i,1)-C2);
+end
+
+function [x1,x2]=SolveX(n,C2)
+A=ConstructA(n);
+beta=ConstructBeta(n,C2);
+X=inv(A'*A)*A'*beta;
+x1=X(1,1);
+x2=X(2,1);
+
+function VisualizeSolution(n,C2)
+for x=1:n
+	y=Fn(x);
+	plot(x,y,'x')
+end
+[x1,x2]=SolveX(n,C2);
+alpha=x1
+C1=exp(x2)
+x=(0:(10*n))*0.1;
+y=C1*exp(alpha*x)+C2;
+plot(x,y)
+
+function ShowCase()
+for i=1:10
+	[x1,x2]=SolveX(10*i,0);
+	alpha=x1
+	C1=exp(x2)
+end
+@}
