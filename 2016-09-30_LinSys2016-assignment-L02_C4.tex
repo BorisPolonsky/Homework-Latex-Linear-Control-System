@@ -130,7 +130,10 @@ extendedchars=true,breaklines=true,
 %%Attach files (tex file;source code;figures;data file;rar archive;etc.)
 %%请在此用命令\myattach{file}插入你的各种源文件（tex文件，源程序，图片文件，数据文件，压缩包，等等）
 \myattach{\jobname.tex}
-% \myattach{myprog01.sq}
+\myattach{UnitMassSystem.sq}
+\myattach{figure2.png}
+\myattach{Schmidt.sq}
+
 \vskip 1cm
 
 %%Main Text: Please provide your solutions here.
@@ -269,23 +272,23 @@ and test your program with some examples.
 Let's test the function with some vectors
 $$v_{1}=[1,2,3]^{T}v_{2}=[4,5,6]^{T}v_{3}=[7,8,9]^{T}$$
 Run the following commands:
-\newline M=[1,2,3;4,5,6;7,8,9]';
+\newline M=[1,1,1;1,1,0;1,0,0]';
 \newline M=Orthonormalize(M)
 \newline We obtain the following result:
 \newline M =
 $$\begin{matrix}
-0.2673  &  0.3492  &  0.3602\\
-0.5345  &  0.5529  &  0.555\\
-0.8018  &  0.7566  &  0.7498\\
+    0.5774  &  0.4082  &  0.7071\\
+    0.5774  &  0.4082  & -0.7071\\
+    0.5774  & -0.8165  &       0\\
 \end{matrix}$$
 To test whether the set colomn vectors forms orthonormal basis of $R^{5}$, simply run the following command:
 \newline M'*M
 \newline And we obtain the result:
 \newline  ans =
 $$\begin{matrix}
-1  &  0.9955  &  0.9941\\
-0.9955  &  1  &  0.9999\\
-0.9941  &  0.9999  &  1\\
+1           &5.5511e-17 &   0\\
+5.5511e-17  &         1 &   0\\
+0           &         0 &   1\\
 \end{matrix}$$
 Given that there's possile data loss during float typed variable computations(which I've failed to fix in this case), the answer we obtained can be consider a 3 by 3 identical matrix, which indicates that the vectors had been converted into orthonormal basis through Gram-Schmidt Procedure.
 \end{solution-c26e158309505f61889ee3b749c66e08}

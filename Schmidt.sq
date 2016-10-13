@@ -1,21 +1,21 @@
 functions
 {@
 function vec_ret=Normalize(vector)
-vec_ret=vector*(1/sqrt(vector'*vector))
+vec_ret=vector*(1/sqrt(vector'*vector));
 
 function M=Orthogonalize(M)
 for i=2:size(M,2)
-	vector=M(:,i)
+	vector=M(:,i);
 	for j=1:i-1
-		vector=vector-vector'*M(:,j)/(M(:,j)'*M(:,j))
+		vector=vector-(M(:,i)'*M(:,j)/(M(:,j)'*M(:,j)))*M(:,j);
 	end
-	M(:,i)=vector
+	M(:,i)=vector;
 end
 
 function M=Orthonormalize(M)
 M=Orthogonalize(M);
 for i=1:size(M,2)
-	M(:,i)=Normalize(M(:,i))
+	M(:,i)=Normalize(M(:,i));
 end
 @}
 //All vectors are represented as column vectors
