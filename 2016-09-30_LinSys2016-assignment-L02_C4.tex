@@ -133,7 +133,7 @@ extendedchars=true,breaklines=true,
 \myattach{UnitMassSystem.sq}
 \myattach{figure2.png}
 \myattach{Schmidt.sq}
-
+\myattach{LinearCircuit2-1.png}
 \vskip 1cm
 
 %%Main Text: Please provide your solutions here.
@@ -149,6 +149,15 @@ Use Sysquake to simulate the usefulness of the feedback amplifier.
 
 \begin{solution-c26e158309505f61889ee3b749c66e08}
  Please put your solution and/or program here ...
+ Assume
+ $$i_{R_{1}}=i_{R_{2}}$$
+ We have following equations. 
+ $$\frac{V-V_{1}}{R_{1}}=\frac{V_{2}-V}{R_{2}}$$
+ $$V_{2}=-AV$$
+ with these two equations we obtain:
+ $$\frac{V_{2}}{V_{1}}=-\frac{R_{2}}{R_{1}}\frac{1}{1+\frac{1}{A}(1+\frac{R_{2}}{R_{1}})}$$
+ Given $A=10^{5}$,$\frac{R_{2}}{R_{1}}=100$, we have $\frac{V_{2}}{V_{1}}=-99.8991$. 
+ From the analysis it's clear that the open loop gain is determined by passive components and the Amplification factor $A$. If we have $A=infinite$, then $\frac{V_{2}}{V_{1}}=-\frac{R_{2}}{R_{1}}$
  %\lstinputlisting{myprog01.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
@@ -182,6 +191,35 @@ and write down the impedance matrix $A$.
 \end{exercise-c26e158309505f61889ee3b749c66e08}
 \begin{solution-c26e158309505f61889ee3b749c66e08}
  Please put your solution and/or program here ...
+ \newline
+ \includegraphics[width=0.8\textwidth]{LinearCircuit2-1.png}
+ \newline Apply KCL to node A we obtain:$$i_{b}=x_{1}-\frac{y_{1}}{R_{1}}$$
+ Apply KCL to node B we obtain:$$\frac{y_{2}+x_{2}}{R}=\frac{y_{2}}{R_{2}}+(1-\beta)i_{b})=\frac{y_{2}}{R_{2}}+(1-\beta)(x_{1}-\frac{y_{1}}{R_{1}})$$
+ Apply KVL to the loop represented by the red rectangle in the figure, we have:
+ $$y_{1}=i_{b}R_{b}+x_{2}+y_{2}=(x1-\frac{y_{1}}{R_{1}})R_{b}+x_{2}+y_{2}$$
+ With these to equations obtain, we have
+ $$
+ \begin{bmatrix}1+\frac{R_{b}}{R_{1}}&-1\\ \frac{1-\beta}{R_{1}}&\frac{1}{R}-\frac{1}{R_{2}}
+\end{bmatrix}
+\begin{bmatrix}y_{1}\\y_{2}\\ \end{bmatrix}=
+\begin{bmatrix}R_{b}&1\\ 1-\beta&-\frac{1}{R}\end{bmatrix}
+\begin{bmatrix}x_{1}\\x_{2}\\ \end{bmatrix}$$
+Hence,
+$$\begin{bmatrix}y_{1}\\y_{2}\\ \end{bmatrix}=
+\frac{1}{(1+\frac{R_{b}}{R_{1}})(\frac{1}{R}-\frac{1}{R_{2}})+\frac{1-\beta}{R_{1}}}
+\begin{bmatrix}\frac{1}{R}-\frac{1}{R_{2}}&1\\-\frac{1-\beta}{R_{1}}&1+\frac{R_{b}}{R_{1}}\end{bmatrix}\begin{bmatrix}R_{b}&1\\ 1-\beta&-\frac{1}{R}\end{bmatrix}
+\begin{bmatrix}x_{1}\\x_{2}\\ \end{bmatrix}$$
+$$\begin{bmatrix}y_{1}\\y_{2}\end{bmatrix}=\frac{1}{(1+\frac{R_{b}}{R_{1}})(\frac{1}{R}-\frac{1}{R_{2}})+\frac{1-\beta}{R_{1}}}\begin{bmatrix}R_{b}(\frac{1}{R}-\frac{1}{R_{2}})+1-\beta&-\frac{1}{R_{2}}\\1-\beta&\frac{R_{1}(\beta-2)+R_{b}}{R_{1}^{2}}\end{bmatrix}\begin{bmatrix}x_{1}\\x_{2}\end{bmatrix}
+$$
+Furthurmore, for $R_{3}$ we have $y_{3}=\frac{x_{2}}{R_{3}}$, then we obtain
+$$\begin{bmatrix}y_{1}\\y_{2}\\y_{3}\end{bmatrix}=\frac{1}{(1+\frac{R_{b}}{R_{1}})(\frac{1}{R}-\frac{1}{R_{2}})+\frac{1-\beta}{R_{1}}}
+\begin{bmatrix}R_{b}(\frac{1}{R}-\frac{1}{R_{2}})+1-\beta&-\frac{1}{R_{2}}\\1-\beta&\frac{R_{1}(\beta-2)+R_{b}}{R_{1}^{2}}\\0&\frac{(1+\frac{R_{b}}{R_{1}})(\frac{1}{R}-\frac{1}{R_{2}})+\frac{1-\beta}{R_{1}}}{R_{3}}
+\end{bmatrix}
+\begin{bmatrix}x_{1}\\x_{2}\end{bmatrix}$$
+In conclusion:
+$$A=\frac{1}{(1+\frac{R_{b}}{R_{1}})(\frac{1}{R}-\frac{1}{R_{2}})+\frac{1-\beta}{R_{1}}}
+\begin{bmatrix}R_{b}(\frac{1}{R}-\frac{1}{R_{2}})+1-\beta&-\frac{1}{R_{2}}\\1-\beta&\frac{R_{1}(\beta-2)+R_{b}}{R_{1}^{2}}\\0&\frac{(1+\frac{R_{b}}{R_{1}})(\frac{1}{R}-\frac{1}{R_{2}})+\frac{1-\beta}{R_{1}}}{R_{3}}
+\end{bmatrix}$$
  %\lstinputlisting{myprog01.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
