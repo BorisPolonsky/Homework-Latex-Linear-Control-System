@@ -171,17 +171,17 @@ be written as $f (x) = Ax$ for some $A \in R^{m\times n}$.\\
  Please put your solution and/or program here ...
  \newline Assume the bases for $R^n$ and $R^m$ are $e_{1},e_{2},\cdots,e_{n}$ and $e_{1},e_{2},\cdots,e_{m}$
  
- $$f[e_{1} e_{2}\cdots e_{n}]=[f(e_{1}) f(e_{2})\cdots f(e_{n})]$$
- for any $x^{T}=[x_{1} x_{2}\cdots x_{n}]$ belongs to $R^{n}$
+ $$f\begin{bmatrix}e_{1}&e_{2}&\cdots&e_{n}\end{bmatrix}=\begin{bmatrix}f(e_{1})&f(e_{2})&\cdots&f(e_{n})\end{bmatrix}$$
+ for any $x^{T}=\begin{bmatrix}x_{1}&x_{2}&\cdots&x_{n}\end{bmatrix}$ belongs to $R^{n}$
  $$x=x_{1}e_{1}+x_{2}e_{2}+\cdots+x_{n}e_{n}$$
  \newline likewise we can represent $y^{T}$ which belongs to $R_{m}$ as
- $$[e_{1} e_{2}\cdots e_{m}][y_{1} y_{2}\cdots y_{m}]^{T}$$
+ $$\begin{bmatrix}e_{1}&e_{2}&\cdots&e_{m}\end{bmatrix}\begin{bmatrix}y_{1}&y_{2}&\cdots&y_{m}\end{bmatrix}^{T}$$
  $$f(x)=f(x_{1}e_{1}+x_{2}e_{2}+\cdots+x_{n}e_{n})$$
  $$=x_{1}f(e_{1})+x_{2}f(e_{2})+\cdots+x_{n}f(e_{n})$$
- $$=[f(e_{1}) f(e_{2}) \cdots f(e_{n})]x$$
- $$=[f(e_{1}) f(e_{2}) \cdots f(e_{n})]x=Ax$$
+ $$=\begin{bmatrix}f(e_{1})&f(e_{2})&\cdots&f(e_{n})\end{bmatrix}x$$
+ $$=\begin{bmatrix}f(e_{1})&f(e_{2})&\cdots&f(e_{n})\end{bmatrix}x=Ax$$
  hence,
- $$A=[f(e_{1}) f(e_{2}) \cdots f(e_{n})]$$
+ $$A=\begin{bmatrix}f(e_{1})&f(e_{2})&\cdots&f(e_{n})\end{bmatrix}$$
  %\lstinputlisting{myprog01.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
