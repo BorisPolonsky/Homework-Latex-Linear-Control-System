@@ -1,0 +1,412 @@
+%%Very Important!!! Please input your personal code and name here!
+%%请在此输入你的个人代码和姓名（请用拼音，不要用汉字）。非常重要！！
+\def\mycode{}
+\def\myname{}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+\documentclass{ctexart}\pagestyle{empty}
+\usepackage{latexsym,afterpage,amssymb,amsmath,amsthm,amsbsy,amsopn,amstext,amsxtra,amscd,color,multicol,bm,calc,lastpage,listings,indentfirst,ifpdf,CJK,CJKnumb,fancybox,fancyhdr,float,subfigure,times,longtable}%常用宏包
+\usepackage{everypage,lastpage}
+\usepackage{graphicx,hyperref}
+\usepackage[left=3cm,right=3cm]{geometry}
+\graphicspath{{./}{fig/}}
+
+\pdfinfo{
+/Keywords (Linear Systems Theory)
+/Title (2016-10-28_LinSys2016-assignment-L03_C4.tex)
+/Subject (Assignment-5,2016-10-28)
+/Creator (c26e158309505f61889ee3b749c66e08)
+/Author (\myname)
+/Producer (\mycode)
+}
+
+%%Load the package attachfile for attaching files in pdf files
+\usepackage{attachfile}
+\newcommand{\myattach}[2][\relax]{
+\IfFileExists{#2}{
+\attachfile{#2}{\ifx\relax#1\fbox{#2}\else\fbox{#1}\fi}
+}{}
+}
+
+
+%%Load the package listings for typesetting program codes
+\usepackage{listings,color}
+\lstdefinelanguage{Ox}{
+keywords={include,import,const,decl,return,if,else,elseif,for,while,switch,break,continue,goto,main},
+sensitive=true,commentstyle=\it\color{red},frame=TB,
+morecomment=[l]{//},morecomment=[s]{/*}{*/},numbers=left,numberstyle=\tiny,
+extendedchars=true,breaklines=true,
+}
+\lstset{language=Ox}
+
+
+\parindent=0pt
+\newcounter{assignment}\setcounter{assignment}{5}
+\newcounter{exercise}\setcounter{exercise}{0}
+\def\exerciseskip{\vskip 0.6cm plus 0.3cm minus 0.3cm}
+\def\solutionskip{\vskip 1cm plus 0.5cm minus 0.5cm}
+\def\exercisewidth{0.8\textwidth}
+\def\solutionwidth{0.8\textwidth}
+\def\exercisecoloring{\color{blue}}
+\def\solutioncoloring{\color{red}}
+\def\textcoloring{\color{black}}
+
+\newenvironment{exercise-c26e158309505f61889ee3b749c66e08}
+{\stepcounter{exercise}\centering\textbf{\large \sc \exercisecoloring Exercise \arabic{assignment}.\arabic{exercise}}\nopagebreak\\[-0.1ex] \hfill\hfill\ovalbox\bgroup\begin{minipage}{\exercisewidth}\exercisecoloring}
+{\end{minipage}\egroup\hfill\hfill\exerciseskip}
+
+\newenvironment{solution-c26e158309505f61889ee3b749c66e08}
+{\centerline{\textbf{\large \sc \solutioncoloring \underline{Solution}}}\par \begingroup\textcoloring}
+{\hfill\hfill $\Box$ \endgroup\solutionskip}
+
+\def\mystar{{\color{red}$^\star$}} 
+\def\mydag{{\color{red}$^{\dagger}$}} 
+\newcommand\mylabel[2][]{\hypertarget{#2}{#1}}
+\newcommand\myref[2][\fbox{$\star$}]{\hyperlink{#2}{#1}}
+
+\def\mytitle{
+\begin{center}
+{\LARGE{Linear Systems Theory}} {
+    \Large \normalsize
+    \hspace*{12cm} Page \thepage\ of \pageref{LastPage}}\\
+    Questions with \mystar\ are not compulsory, 
+    while questions with \mydag\ are compulsory.\\
+    You need to solve at least one question in each assignment.\\
+    The more questions you answer, the more points you gain.
+\end{center}
+}
+
+\AddEverypageHook{
+\fancyhf{}%
+\mytitle
+}
+
+
+%%---You may add your own definitions here---
+%%──你自己定义的命令可以放在这里──
+\def\R{\mathcal{R}}
+\def\Q{\mathcal{Q}}
+\def\C{\mathcal{C}}
+\def\F{\mathcal{F}}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+\begin{document}%
+\begin{CJK*}{GBK}{kai}
+%-------版面的线框用页眉元素表现--------
+%---第一页与众不同---
+\newsavebox{\firstpgframe}
+\sbox{\firstpgframe}{\parbox{157mm}{
+\begin{center}
+\begin{minipage}[t][153mm][t]{157mm}
+\makebox[4mm][l]{\fbox{\parbox[t][153mm][t]{157mm}{\ }}}
+\end{minipage}
+\end{center}
+}}
+\vspace*{-6mm}
+
+\newsavebox{\zdx}
+\sbox{\zdx}
+	{\parbox{412pt}{
+	\centering \CJKfamily{kai}
+代~码(Code)\underline{\makebox[20mm][c]{\mycode}}~学~号(ID)\underline{\makebox[30mm][c]{}}~~~姓~名(Name)\underline{\makebox[30mm][c]{\myname}}
+
+\vspace{3mm}
+\dotfill{}装\dotfill{}订\dotfill{}线\dotfill{}(Gutter)\dotfill{}
+}}
+\setlength{\marginparsep}{-10mm}
+\reversemarginpar
+\marginpar{
+\parbox{10mm}{\vspace{3cm}
+\rotatebox[origin=c]{90}{
+\usebox{\zdx}
+}
+}}
+
+%%Attach files (tex file;source code;figures;data file;rar archive;etc.)
+%%请在此用命令\myattach{file}插入你的各种源文件（tex文件，源程序，图片文件，数据文件，压缩包，等等）
+\myattach{\jobname.tex}
+\myattach{myprog01.ox}
+\vskip 1cm
+
+%%Main Text: Please provide your solutions here.
+%%正文：请在此查看你的作业，并填写你的答案。
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\textsl{Woodbury matrix identity.}
+\begin{enumerate}
+    \item Solve the following block matrix inversion problem:
+    $$\left[\begin{array}{cc}
+    A & U\\
+    V & -C^{-1}
+    \end{array}\right]\left[\begin{array}{c}
+    X\\
+    Y
+    \end{array}\right] = \left[\begin{array}{c}
+    I\\
+    0
+    \end{array}\right], A \in R^{n \times n}, U \in R^{n \times k}, C \in R^{k \times k}, V \in R^{k \times n}
+    $$
+    Please figure out $X$ and $Y$.
+    \item Prove $(A + UCV)^{-1} = X = A^{-1} - A^{-1}U(C^{-1} + VA^{-1}U)^{-1}VA^{-1}$.
+    \item Please prove the rank one update formula 
+    $$(P + a a^{T})^{-1} = P^{-1} - \frac{1}{1 + a^{T}P^{-1}a}(P^{-1}a)(P^{-1}a)^{T}$$ 
+    by the equation above.
+    \item Use the above formula to establish the formula of recursive least squares.
+    \item Establish the formula of recursive weighted least squares based on RLS algorithm.
+\iffalse
+    \item We know that the difference equation of ARMA model is 
+    $$y(k) + \sum_{i=1}^{n}a_{i}y(k-i) = \sum_{i=1}^{n}b_{i}u(k-i) + e(k)$$
+    \begin{enumerate}
+    \item Rewrite ARMA model into the regressor form like $y(k)=\theta^{T}\phi(k)+e(k)$.
+    \item 
+    \end{enumerate}
+    \end{itemize}
+    Define $\phi_{k}^{T} = [-y(n+k-1), \ldots, -y(k), u(n+k-1), \ldots, u(k)]$\\
+    and $\theta^{T} = [a_{1}, a_{2}, \ldots, a_{n}, b_{1}, b_{2}, \ldots, b_{n}]$\\ we have $y(n+k) = \phi_{k}^{T}\theta + e(n+k)$.\\
+    The sum of squared residuals is $J = \sum_{k=n+1}^{k=n+N}[y(k) - \phi_{k-n}^{T}\theta]$, so we regard $J = e_{N}^{T}e_{N}$ as the norm.\\
+    And 
+    $$e_{N} = y_{N} - \Phi_{N}\theta = \left[\begin{array}{c}
+    e(n+1)\\
+    e(n+2)\\
+    \vdots\\
+    e(n+N)
+    \end{array}\right], y_{N} = \left[\begin{array}{c}
+    y(n+1)\\
+    y(n+2)\\
+    \vdots\\
+    y(n+N)
+    \end{array}\right]
+    $$
+    $$\Phi_{N}=\left[\begin{array}{c}
+    \phi_{1}^{T}\\
+    \phi_{2}^{T}\\
+    \vdots\\
+    \phi_{N}^{T}
+    \end{array}\right] = \left[\begin{array}{cccccc}
+    -y(n) & \ldots & -y(1) & u(n) & \ldots & u(1)\\
+    -y(n+1) & \ldots & -y(2) & u(n+1) & \ldots & u(2)\\
+    \ldots &   & \ldots & \ldots &   &\ldots\\
+    -y(n+N-1) & \ldots & -y(N) & u(n+N-1) & \ldots & u(N)
+    \end{array}\right]
+    $$
+    We get the least-squares estimation $\hat{\theta}_{N} = (\Phi_{N}^{T}\Phi_{N})^{-1}\Phi_{N}^{T}y_{N}$, please give the recursive formulation $\hat{\theta}_{N+1} = f_{1}(\hat{\theta}_{N})$
+    \item While $J = e_{N}^{T}w_{N}e_{N}$, give the $\hat{\theta}_{N+1} = f_{2}(\hat{\theta}_{N})$
+\fi
+\end{enumerate}
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ \\1:From orginal equation we obtain:
+ $$AX+UY=I$$
+ $$VX=C^{-1}Y$$
+ hence,
+ $$Y=CVX$$
+ By submitting $Y=CVX$ into $AX+UY=I$,we obtain $(A+UCV)X=I$. Since I is a full rank matrix, it's clear that $Rank(A+UCV)=Rank(X)=n$. So $A+UCV$ is invertible. We obtain
+ $$X=(A+UCV)^{-1}$$
+ $$Y=CV(A+UCV)^{-1}$$
+ 2:$X=(A+UCV)^{-1}$ got proved in question 1. 
+ We now prove that $(A+UCV)^{-1}=A^{-1} - A^{-1}U(C^{-1} + VA^{-1}U)^{-1}VA^{-1}$ by proving that
+ $(A+UCV)(A^{-1} - A^{-1}U(C^{-1} + VA^{-1}U)^{-1}VA^{-1})=I$
+ $$(A+UCV)(A^{-1} - A^{-1}U(C^{-1} + VA^{-1}U)^{-1}VA^{-1})$$
+ $$I+UCVA^{-1}-(U+UCVA^{-1}U)(C^{-1}+VA^{-1}U)^{-1}VA^{-1}$$
+ $$I+UCVA^{-1}-(UCC^{-1}+UCVA^{-1}U)(C^{-1}+VA^{-1}U)^{-1}VA^{-1}$$
+ $$I+UCVA^{-1}-UC(C^{-1}+VA^{-1}U)(C^{-1}+VA^{-1}U)^{-1}VA^{-1}$$
+ $$I+UCVA^{-1}-UCVA^{-1}=I$$
+ Thus, we obtain $X=(A+UCV)^{-1}=(A^{-1} - A^{-1}U(C^{-1} + VA^{-1}U)^{-1}VA^{-1})$
+ \\3:Assume $P=A$,$U=a$,$C=1$,$V=a^{T}$. 
+ $$(A+UCV)^{-1}=P^{-1}-P^{-1}a(1+a^{T}P^{-1}a)^{-1}a^{T}P^{-1}$$
+ $$=P^{-1}-\frac{1}{1+a^{T}P^{-1}a}P^{-1}aa^{T}P^{-1}$$
+ If $P=P^{T}$ then,
+ $$=P^{-1}-\frac{1}{1+a^{T}P^{-1}a}(P^{-1}a)(P^{-1}a)^{T}$$
+ \\4:To solve $J=min\left\lVert v \right\rVert=min \left\lVert Ax-y  \right\rVert=min\sqrt{\sum_{i=1}^{n}(a_{i}^{T}x-y_{i})^{2}}$
+ Assume $L=\sum_{i=1}^{n}(a_{i}^{T}x-y_{i})^{2}$
+ $$\frac{\partial L}{\partial x}=\sum_{i=1}^{n}(2a_{i}a_{i}^{T}x-2y_{i}a_{i})=0$$
+ We obtain the optimal solution $x_{ls}=(\sum_{i=1}^{n}a_{i}a_{i}^{T})^{-1}\sum_{i=1}^{n}y_{i}a_{i}$
+ \\Define $P(m)$,$P(0)$,$q(m)$, $q(0)$ and $x_{ls}(m)$ as below:
+ $$P(m)=\sum_{i=1}^{m}a_{i}a_{i}^{T}=P(m-1)+a_{m}a_{m}^{T}$$
+ $$P(0)=0\in R^{n\times n}$$
+ $$q(m)=\sum_{i=1}^{m}y_{i}a_{i}$$
+ $$q(0)=0\in R^{n}$$
+ $$x_{ls}(m)=(\sum_{i=1}^{m}a_{i}a_{i}^{T})^{-1}\sum_{i=1}^{m}y_{i}a_{i}=P(m)^{-1}q(m)$$
+ By applying rank one update formula, we obtain
+ $$P(m+1)^{-1}=(P(m)+a_{m+1}a_{m+1}^{T})^{-1}=P(m)^{-1}-\frac{1}{1+a(m+1)^{T}P(m)^{-1}a(m+1)}(P(m)^{-1}a_{m})(P(m)^{-1}a_{m})^{T}$$
+ From this we can verify that if $P(k)$ is invertible, then $P(l)$ is invertible for all $l>k$. By calculating $P(n)^{-1}$ recursively, we can obtain the optimal solution $x_{ls}$ and $J$. 
+ \\5:
+ %\lstinputlisting{myprog01.ox}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mystar
+\textsl{Some standard time-series models. } A time series is just a discrete-time signal, \textit{i.e.}, a function from $Z_{+}$ into $R$. We think of $u(k)$ as the value of the signal or quantity $u$ at time (or \textsl{epoch}) $k$. The study of time series predates the extensive study of state-space linear systems, and is used in many fields (\textit{e.g.}, econometrics). Let $u$ and $y$ be two time series (input and output, respectively). The relation (or \textsl{time series model} )
+$$y(k) = a_{0}u(k) + a_{1}u(k - 1) + \ldots + a_{r}u(k - r)$$
+is called a \textsl{moving average ($MA$) model}, since the output at time $k$ is a weighted average of the previous $r$ inputs, and the set of variables over which we average ‘slides along’ with time. Another model is given by
+$$y(k) = u(k) + b_{1}y(k - 1) + \ldots + b_{p}y(k - p).$$
+This model is called an \textsl{autoregressive ($AR$) model}, since the current output is a linear combination of (\textit{i.e.}, regression on) the current input and some previous values of the output. Another widely used model is the \textsl{autoregressive moving average (ARMA) model}, which combines the MA and AR models:
+$$y(k) = b_{1}y(k - 1) + \ldots + b_{p}y(k - p) + a_{0}u(k) + \ldots + a_{r}u(k - r).$$
+Finally, the problem: Express each of these models as a linear dynamical system with input $u$ and output $y$. For the MA model, use state
+$$x(k) = \left[\begin{array}{c}
+u(k - 1)\\
+\vdots\\
+u(k - r)
+\end{array}\right],
+$$
+and for the AR model, use state
+$$x(k) = \left[\begin{array}{c}
+y(k - 1)\\
+\vdots\\
+y(k - p)
+\end{array}\right].$$
+You decide on an appropriate state vector for the ARMA model. (There are many possible choices for the state here, even with different dimensions. We recommend you choose a state for the ARMA model that makes it easy for you to derive the state equations.) \textbf{Remark:} multi-input, multi-output time-series models (\textit{i.e.}, $u(k) \in R^{m}, y(k) \in R^{p}$) are readily handled by allowing the coefficients $a_{i}, b_{i}$ to be matrices.
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ \\For MA model,
+ $$x(k) = \left[\begin{array}{c}
+u(k - 1)\\
+\vdots\\
+u(k - r)
+\end{array}\right]
+$$
+ $$x(k+1) - x(k)= \left[\begin{array}{c}
+u(k)-u(k-1)\\
+\vdots\\
+u(k - r + 1) - u(k-r)
+\end{array}\right]=
+\begin{bmatrix}
+-1&0&0&\cdots&0\\
+1&-1&0&\cdots&0\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&\cdot&\cdots&1&-1
+\end{bmatrix}
+x(k)+
+\left[\begin{array}{c}
+1\\
+0\\
+\vdots\\
+0
+\end{array}\right]u(k)
+$$
+$$
+y(k)=diag\left\{a_{1},a_{2},\cdots,a_{r}\right\}x(k)+a_{0}u(k)
+$$
+For AR model,
+$$x(k) = \left[\begin{array}{c}
+y(k - 1)\\
+\vdots\\
+y(k - p)
+\end{array}\right]
+$$
+
+$$
+y(k)=
+\begin{bmatrix}
+b_{1}&b_{2}&\cdots&b_{p}
+\end{bmatrix}x(k)
++u(k)
+$$
+
+$$
+x(k+1)-x(k)= \left[\begin{array}{c}
+y(k)-y(k - 1)\\
+\vdots\\
+y(k - p +1)-y(k - p)
+\end{array}\right]=
+\begin{bmatrix}
+-1&0&0&\cdots&0\\
+1&-1&0&\cdots&0\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&\cdot&\cdots&1&-1
+\end{bmatrix}x(k)+
+\left[\begin{array}{c}
+1\\
+0\\
+\vdots\\
+0
+\end{array}\right]y(k)
+$$
+
+$$
+=\begin{bmatrix}
+-1&0&0&\cdots&0\\
+1&-1&0&\cdots&0\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&\cdot&\cdots&1&-1
+\end{bmatrix}x(k)+
+\left[\begin{array}{c}
+1\\
+0\\
+\vdots\\
+0
+\end{array}\right]
+\left(\begin{bmatrix}
+b_{1}&b_{2}&\cdots&b_{p}
+\end{bmatrix}x(k)
++u(k)\right)
+$$
+
+$$
+=\begin{bmatrix}
+b_{1}-1&b_{2}&b_{3}&\cdots&b_{p}\\
+1&-1&0&\cdots&0\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&\cdot&\cdots&1&-1
+\end{bmatrix}x(k)+
+\left[\begin{array}{c}
+1\\
+0\\
+\vdots\\
+0
+\end{array}\right]
+u(k)
+$$
+
+ %\lstinputlisting{myprog01.ox}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+Please program with sysquake and calculate the value of $\pi$ via the following Euler series: 
+$$1 + \frac{1}{2^{2}} + \frac{1}{3^{2}} + \frac{1}{4^{2}}+\ldots=\frac{\pi^{2}}{6}$$
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ %\lstinputlisting{myprog01.ox}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+\textsl{Mass/force example.} For $n=4$, resolve the following questions. Your solutions are expected to be easily extended to general $n$.
+\begin{enumerate}
+    \item Find the matrix $A$ for the mass/force example in the lecture notes.
+    \item  For $n = 4$, find a specific input force sequence $x$ that moves the mass to final position 1 and final velocity zero.
+    \item Find $f$ that meets the specifications and minimizes the sum of squares of the forces, \textit{i.e.}, $f_{1}^{2} + f_{2}^{2} + \cdots + f_{n}^{2}.$
+    \item Find $f$ that meets the specifications and minimizes the sum of squares of the forces, \textit{i.e.}, $f_{1}^{2} + f_{2}^{2} + \cdots + f_{n}^{2}$, by programing with Rlab and give your codes and simulation results. ( include the sequence of location and velocity, and the best $f$). At last, you should verify the optimality of your $f$ (You can verify it by examples).
+    \item Find $f$ that meets the specifications and minimizes the maximum force applied, \textit{i.e.}, max\{$|f_{1}|, |f_{2}|, \cdots, |f_{n}|$\}.
+    \item Find $f$ that meets the specifications and minimizes the sum of absolute values of the forces applied, \textit{i.e.}, $|f_{1}| + |f_{2}| + \cdots + |f_{n}|$. (This would correspond to\textsl{ minimum fuel usage} if the force comes from a thruster.)
+\end{enumerate}
+\textsl{Hints}:\\
+ Roughly speaking, you have $n$ variables and two equations, and therefore $n-2$ extra degrees of freedom. 
+ In this problem you use the extra degrees of freedom to achieve other objectives, \textit{i.e.}, minimize some cost functions .\\
+ There might be more than one minimizer; we just want one. If you can solve these optimization problems exactly, that’s fine; but you are free to solve the problems numerically (and even approximately). We don’t need an analysis verifying that your solution is indeed the best one. Make sure your solutions make sense to you. 
+\begin{itemize}
+    \item You can pick $f_{1}$ and $f_{2}$ to be anything; then $f_{3}$ and $f_{4}$ can be expressed in terms of $f_{1}$ and $f_{2}$.
+    \item You can plot, or just evaluate, each cost function as a function of $f_{1}$ and $f_{2}$, over some reasonable range, to find the minimum.
+\end{itemize}
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ %\lstinputlisting{myprog01.ox}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+\end{CJK*}
+\end{document}
+
+
+
