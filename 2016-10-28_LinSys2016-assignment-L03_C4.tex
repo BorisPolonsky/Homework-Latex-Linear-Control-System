@@ -278,17 +278,42 @@ u(k - r + 1) - u(k-r)
 \begin{bmatrix}
 -1&0&0&\cdots&0\\
 1&-1&0&\cdots&0\\
+0&1&-1&\cdots&0\\
 \cdots&\cdots&\cdots&\cdots&\cdots\\
-0&\cdot&\cdots&1&-1
+0&\cdots&0&1&-1
 \end{bmatrix}
 x(k)+
 \left[\begin{array}{c}
 1\\
 0\\
+0\\
 \vdots\\
 0
 \end{array}\right]u(k)
 $$
+
+$$x(k+1)= \left[\begin{array}{c}
+u(k)\\
+\vdots\\
+u(k - r + 1)
+\end{array}\right]=
+\begin{bmatrix}
+0&0&0&\cdots&0\\
+1&0&0&\cdots&0\\
+0&1&0&\cdots&0\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&\cdots&0&1&0
+\end{bmatrix}
+x(k)+
+\left[\begin{array}{c}
+1\\
+0\\
+0\\
+\vdots\\
+0
+\end{array}\right]u(k)
+$$
+
 $$
 y(k)=diag\left\{a_{1},a_{2},\cdots,a_{r}\right\}x(k)+a_{0}u(k)
 $$
@@ -317,11 +342,13 @@ y(k - p +1)-y(k - p)
 \begin{bmatrix}
 -1&0&0&\cdots&0\\
 1&-1&0&\cdots&0\\
+0&1&-1&\cdots&0\\
 \cdots&\cdots&\cdots&\cdots&\cdots\\
-0&\cdot&\cdots&1&-1
+0&\cdots&0&1&-1
 \end{bmatrix}x(k)+
 \left[\begin{array}{c}
 1\\
+0\\
 0\\
 \vdots\\
 0
@@ -329,14 +356,16 @@ y(k - p +1)-y(k - p)
 $$
 
 $$
-=\begin{bmatrix}
+\begin{bmatrix}
 -1&0&0&\cdots&0\\
 1&-1&0&\cdots&0\\
+0&1&-1&\cdots&0\\
 \cdots&\cdots&\cdots&\cdots&\cdots\\
-0&\cdot&\cdots&1&-1
+0&\cdots&0&1&-1
 \end{bmatrix}x(k)+
 \left[\begin{array}{c}
 1\\
+0\\
 0\\
 \vdots\\
 0
@@ -348,20 +377,132 @@ b_{1}&b_{2}&\cdots&b_{p}
 $$
 
 $$
-=\begin{bmatrix}
+x(k+1)-x(k)=\begin{bmatrix}
 b_{1}-1&b_{2}&b_{3}&\cdots&b_{p}\\
 1&-1&0&\cdots&0\\
+0&1&-1&\cdots&0\\
 \cdots&\cdots&\cdots&\cdots&\cdots\\
-0&\cdot&\cdots&1&-1
+0&\cdots&0&1&-1
 \end{bmatrix}x(k)+
 \left[\begin{array}{c}
 1\\
+0\\
 0\\
 \vdots\\
 0
 \end{array}\right]
 u(k)
 $$
+
+$$
+x(k+1)= \left[\begin{array}{c}
+y(k)\\
+\vdots\\
+y(k - p +1)
+\end{array}\right]=
+\begin{bmatrix}
+b_{1}&b_{2}&b_{3}&\cdots&b_{p}\\
+1&0&0&\cdots&0\\
+0&1&0&\cdots&0\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&\cdots&0&1&0
+\end{bmatrix}x(k)+
+\left[\begin{array}{c}
+1\\
+0\\
+0\\
+\vdots\\
+0
+\end{array}\right]u(k)
+$$
+
+For ARMA model,
+$$
+x(k)=
+\left[\begin{array}{c}
+u(k-1)\\
+\vdots\\
+u(k-r)\\
+y(k-1)\\
+\vdots\\
+y(k-p)
+\end{array}\right]
+$$
+
+$$
+y(k)=
+\begin{bmatrix}%
+a_{1}&\cdots&a_{r}&b_{1}&\cdots&b_{p}
+\end{bmatrix}
+x(k)+a_{0}u(k)
+$$
+
+Define $M^{MA}_{k}$ as
+$$
+M^{MA}_{k}=
+\begin{bmatrix}%
+0_{1\times (k-1)}&0\\
+I_{k-1}&0_{(k-1)\times 1}
+\end{bmatrix}
+$$.
+
+Define $M^{AR}_{k}$ as,
+$$
+M^{AR}_{k}=
+\begin{bmatrix}%
+b_{1}&b_{2}&b_{3}&\cdots&b_{p}\\
+1&0&\cdots&\cdots&0\\
+0&1&0&\cdots&0\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&\cdots&0&1&0\\
+\end{bmatrix}
+$$.
+
+$$
+x(k+1)=
+\left[\begin{array}{c}
+u(k)\\
+\vdots\\
+u(k-r+1)\\
+y(k)\\
+\vdots\\
+y(k-p+1)
+\end{array}\right]=
+\begin{bmatrix}%
+M^{MA}_{r}&0\\
+0&M^{MA}_{p}
+\end{bmatrix}x(k)+\varepsilon_{1}u(k)+\varepsilon_{r+1}y(k)
+$$
+
+$$
+=
+\begin{bmatrix}%
+M^{MA}_{r}&0_{r\times p}\\
+0_{p\times r}&M^{MA}_{p}
+\end{bmatrix}x(k)+\varepsilon_{1}u(k)+\varepsilon_{r+1}
+\left(
+\begin{bmatrix}%
+a_{1}&\cdots&a_{r}&b_{1}&\cdots&b_{p}
+\end{bmatrix}
+x(k)+a_{0}u(k)
+\right)
+$$
+Thus, we obtain
+$$
+x(k+1)=
+\begin{bmatrix}%
+M^{MA}_{r}&0_{r\times p}\\
+L_{p\times r}&M^{AR}_{p}
+\end{bmatrix}x(k)+(\varepsilon_{1}+a_{0}\varepsilon_{r+1})u(k)
+$$
+ ,where $L_{p\times r}=
+\left[\begin{array}{c}
+\begin{matrix}%
+a_{1}&a_{2}&\cdots&a_{r}
+\end{matrix}\\
+0_{(p-1)\times r}
+\end{array}\right]$.
+
 
  %\lstinputlisting{myprog01.ox}
 \end{solution-c26e158309505f61889ee3b749c66e08}
