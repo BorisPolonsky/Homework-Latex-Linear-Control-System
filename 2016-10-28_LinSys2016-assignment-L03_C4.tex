@@ -127,7 +127,10 @@ extendedchars=true,breaklines=true,
 %%Attach files (tex file;source code;figures;data file;rar archive;etc.)
 %%请在此用命令\myattach{file}插入你的各种源文件（tex文件，源程序，图片文件，数据文件，压缩包，等等）
 \myattach{\jobname.tex}
-\myattach{myprog01.ox}
+\myattach{ApproximatePi.sq}
+\myattach{L03ApproximatePi.png}
+\myattach{L03L2NormCtrl.png}
+\myattach{UnitMassSystemControl.sq}
 \vskip 1cm
 
 %%Main Text: Please provide your solutions here.
@@ -220,10 +223,9 @@ extendedchars=true,breaklines=true,
  $$=P^{-1}-\frac{1}{1+a^{T}P^{-1}a}P^{-1}aa^{T}P^{-1}$$
  If $P=P^{T}$ then,
  $$=P^{-1}-\frac{1}{1+a^{T}P^{-1}a}(P^{-1}a)(P^{-1}a)^{T}$$
- \\4:To solve $J=min\left\lVert v \right\rVert=min \left\lVert Ax-y  \right\rVert=min\sqrt{\sum_{i=1}^{n}(a_{i}^{T}x-y_{i})^{2}}$
- Assume $L=\sum_{i=1}^{n}(a_{i}^{T}x-y_{i})^{2}$
- $$\frac{\partial L}{\partial x}=\sum_{i=1}^{n}(2a_{i}a_{i}^{T}x-2y_{i}a_{i})=0$$
- We obtain the optimal solution $x_{ls}=(\sum_{i=1}^{n}a_{i}a_{i}^{T})^{-1}\sum_{i=1}^{n}y_{i}a_{i}$
+ \\4:To solve $J=min\left\lVert v \right\rVert=min \left\lVert Ax-y  \right\rVert=min\sqrt{\sum_{i=1}^{n}(a_{i}^{T}x-y_{i})^{2}}$, assume 
+ $$L=\sum_{i=1}^{n}(a_{i}^{T}x-y_{i})^{2}$$
+ $$\frac{\partial L}{\partial x}=\sum_{i=1}^{n}(2a_{i}a_{i}^{T}x-2y_{i}a_{i})=0$$, then we obtain the optimal solution $x_{ls}=(\sum_{i=1}^{n}a_{i}a_{i}^{T})^{-1}\sum_{i=1}^{n}y_{i}a_{i}$
  \\Define $P(m)$,$P(0)$,$q(m)$, $q(0)$ and $x_{ls}(m)$ as below:
  $$P(m)=\sum_{i=1}^{m}a_{i}a_{i}^{T}=P(m-1)+a_{m}a_{m}^{T}$$
  $$P(0)=0\in R^{n\times n}$$
@@ -531,11 +533,12 @@ Plot the curve of approximation by running the following command:
 PlotPiApproximation(200)
 \end{verbatim}
 We obtain the figure shown below:
-\begin{figure}
+\begin{figure}[h!]
   \includegraphics[width=\linewidth]{L03ApproximatePi.png}
   %\caption{$\pi$ Approximation}
   %\label{fig:piapprox}
 \end{figure}
+\newpage
  %\lstinputlisting{myprog01.ox}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
@@ -563,7 +566,7 @@ We obtain the figure shown below:
 
 \begin{solution-c26e158309505f61889ee3b749c66e08}
  For question 1 and 2, the Mass/Force analysis and the sysquake code implemented in the last section are both compatible to this section. Hence, we modify the code for Unit Mass System in the last section and use it to illustrate the solution. The modified code will be shown in the end of this subsection. 
- \newline Given that $F=ma$, m=1, it is clear that for the $k_{th}$ interval,
+ \newline Given that $F=ma$, $m=1$, it is clear that for the $k_{th}$ interval,
  $$v_{k}=y_{2}(k)=\sum_{i=1}^{k}x_{i}$$
  for $s=v_{0}t+\frac{1}{2}at^{2}$
  we have $s_{k+1}-s_{k}=y_{1}(k+1)-y_{1}(k)=y_{2}(k)+\frac{1}{2}x_{k+1}$
@@ -592,11 +595,68 @@ is underdetermined. A possible solution could be the least 2-norm solution given
 0.3&0.1&-0.3&-0.1
 \end{bmatrix}^{T}$
 \\3:We now prove that $x_{l2n}=A^{T}(AA^{T})^{-1}y$ is the least 2-norm solution subject to $y=Ax$.
+Minimize $\left\lVert x \right\rVert_{2}$ s.t $Ax=y$ by minimizing
+$$J=\left\lVert x \right\rVert_{2}^{2}+\lambda^{T}(y-Ax)$$
+$$0=\frac{\partial J}{\partial x}=2x-A^{T}\lambda$$
+$$x=\frac{1}{2}A^{T}\lambda$$
+Given
+$$\frac{\partial J}{\partial \lambda}=0$$
+which is equivalent to $y-Ax=0$, we obtain:
+$$y=Ax=\frac{1}{2}AA^{T}\lambda$$
+$$\lambda=2(AA^{T})^{-1}y$$
+Hense,
+$$x_{l2n}=A^{T}(AA^{T})^{-1}y$$. 
 
-Now we plot the least 2-norm solution by running command:
+4:Now we plot the least 2-norm solution by running command: 
+
 \begin{verbatim}
+x=Least2NormControl(1,0,4)
+DisplayMotion(x)
+norm(x,2)
 
 \end{verbatim}
+We obtain the least 2-norm control and the states in each time interval. 
+\begin{verbatim}
+x =
+       0.3
+      1e-1
+     -1e-1
+      -0.3
+pos =
+         0
+v =
+         0
+pos =
+      0.15
+v =
+       0.3
+pos =
+       0.5
+v =
+       0.4
+pos =
+      0.85
+v =
+       0.3
+pos =
+         1
+v =
+         0
+ans =
+    0.4472
+\end{verbatim}
+The corresponding curves are:
+\begin{figure}[h!]
+\includegraphics[width=\linewidth]{L03L2NormCtrl.png}
+\end{figure}
+\\5:It's obvious that $n\geq2$ otherwise there's no solution. 
+Denote as $\left\lVert A\right\rVert_{p}$ the induced matrix p-norm. 
+We have $\left\lVert y\right\rVert_{\infty}=\left\lVert Ax\right\rVert_{\infty}\leq\left\lVert A\right\rVert_{\infty}\left\lVert x\right\rVert_{\infty}$. Thus, we have $max\{|f_{1}|, |f_{2}|, \cdots, |f_{n}|\}=\left\lVert x\right\rVert_{\infty}\geq \frac{\left\lVert y\right\rVert_{\infty}}{\left\lVert A\right\rVert_{\infty}}=J$. In case $n\geq2$, $J=\frac{\left\lVert y\right\rVert_{\infty}}{\left\lVert\alpha_{1}\right\rVert_{1}}$ where $\alpha_{1}$ is a vector form by the elements in the first row of A. Given that $\left\lVert\alpha_{1}\right\rVert_{1}$ is sum of arithmetic sequence we have $J=\left\lVert\alpha_{1}\right\rVert_{1}=\frac{n^{2}}{2}$
+If the intersection of $\{x|y=Ax\}$ and $\{\left\lVert x\right\rVert_{\infty}=J\}$  is not empty, the problem is equivalent to:
+Solve $y=Ax$ s.t $\left\lVert x\right\rVert_{\infty}=J$ 
+\\6:
+\\
+\\Finally, the modified code is shown below:
 \lstinputlisting{UnitMassSystemControl.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
