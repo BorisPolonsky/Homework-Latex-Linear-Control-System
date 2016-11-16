@@ -1,0 +1,40 @@
+functions
+{@
+function [pos,velocity]=StateTransform(F,pos_0,v_0)
+velocity=v_0+F;
+pos=pos_0+v_0+1/2*F;
+
+function DisplayMotion(X)
+pos=0
+v=0
+if size(X,1)>0
+	X=X';
+end
+for i=1:size(X,2)
+	pos_t=0:100;
+	v_t=0:100;
+	t=0:100;
+	for j=0:100
+		t(1,j+1)=0.01*j;
+		pos_t(1,j+1)=pos+v*t(1,j+1)+1/2*X(1,i)*(t(1,j+1)^2);
+		v_t(1,j+1)=v+X(1,i)*t(1,j+1);
+		t(1,j+1)=t(1,j+1)+i-1;
+	end
+	plot(t,pos_t)
+	plot(t,v_t)
+	[pos,v]=StateTransform(X(1,i),pos,v)
+	plot(i,pos,'o')
+	plot(i,v,'x')
+end
+
+function A=getTransform(n)
+A=zeros(2,n);
+for i=1:n
+	A(1,i)=n+0.5-i;
+	A(2,i)=1;
+end
+
+function x=Least2NormControl(t_pos,t_velocity,n)
+A=getTransform(n);
+x=A'*inv(A*A')*[t_pos;t_velocity];
+@}
