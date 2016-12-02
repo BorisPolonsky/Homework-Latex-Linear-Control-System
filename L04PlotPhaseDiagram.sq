@@ -1,0 +1,16 @@
+functions
+{@
+function [dx]=trans(t,x)
+	dx=zeros(2,1);
+	A=[-0.5 1;-1 0.5];
+	//dx(1)=A(1,1)*x(1)+A(1,2)*x(2);
+	//dx(2)=A(2,1)*x(1)+A(2,2)*x(2);
+	dx=A*x;
+function phaseplot(tspan,x0)
+	//options=odeset('RelTol',1e-4,'AbsTol',[1e-4 1e-4]);
+	//[T,X]=ode45(@trans,[0,20],[1;1],options);
+	[T,X]=ode45(@trans,tspan,x0);
+	X1=X(:,1)';
+	X2=X(:,2)';
+	plot(X1,X2,'-')
+@}
