@@ -1,0 +1,335 @@
+%%Very Important!!! Please input your personal code, name and student number here!
+%%请在此输入你的个人代码、和姓名（请用拼音，不要用汉字）和学号。非常重要！！
+\def\mycode{}
+\def\myname{}
+\def\myStudentNumber{}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+% \documentclass{ctexart}\pagestyle{empty}
+\documentclass{article}\pagestyle{empty}
+\usepackage{latexsym,afterpage,amssymb,amsmath,amsthm,amsbsy,amsopn,amstext,amsxtra,amscd,color,multicol,bm,calc,lastpage,listings,indentfirst,ifpdf,CJK,CJKnumb,fancybox,fancyhdr,float,subfigure,times,longtable}%常用宏包
+\usepackage{everypage,lastpage}
+\usepackage{graphicx,hyperref}
+\usepackage[left=3cm,right=3cm]{geometry}
+\graphicspath{{./}{fig/}{theme0/}{pic15/}}
+
+\pdfinfo{
+/Keywords (Linear Systems Theory)
+/Title (2016-11-18_LinSys2016-assignment-L05_C4.tex)
+/Subject (Assignment-8,2016-11-18)
+/Creator (\mycode)
+/Author (\myname)
+/Producer (\mycode)
+}
+
+%%Load the package attachfile for attaching files in pdf files
+\usepackage{attachfile}
+\newcommand{\myattach}[2][\relax]{
+\IfFileExists{#2}{
+\attachfile{#2}{\ifx\relax#1\fbox{#2}\else\fbox{#1}\fi}
+}{}
+}
+
+
+%%Load the package listings for typesetting program codes
+\usepackage{listings,color}
+\lstdefinelanguage{Ox}{
+keywords={include,import,const,decl,return,if,else,elseif,for,while,switch,break,continue,goto,main},
+sensitive=true,commentstyle=\it\color{red},frame=TB,
+morecomment=[l]{//},morecomment=[s]{/*}{*/},numbers=left,numberstyle=\tiny,
+extendedchars=true,breaklines=true,
+}
+\lstdefinelanguage{sysquake}{
+keywords={include,includeifexists,info,use,useifexists,const,private,public,global,profile,error,return,if,else,elseif,end,for,while,repeat,until,switch,break,catch,continue,define,function,otherwise,functions,init,figure,draw,menu,plot,line,separator,beginmenu,endmenu,beginsubmenu,endsubmenu,data,dragin,dragout,embeddedfile,export,extension,help,idle,import,input,keydown,make,mousedown,mousedoubleclick,mousedrag,mousedragcont,mouseout,mouseover,mousescroll,mouseup,output,publichandler,resize,terminate,title,userinterface,variable,variables,version,assert,warning,varargin,varargout},
+sensitive=true,commentstyle=\it\color{red},frame=TB,
+morecomment=[l]{//},morecomment=[s]{/*}{*/},numbers=left,numberstyle=\tiny,
+extendedchars=true,breaklines=true,
+}
+\lstset{language=sysquake}
+
+
+\parindent=0pt
+\newcounter{assignment}\setcounter{assignment}{8}
+\newcounter{exercise}\setcounter{exercise}{0}
+\def\exerciseskip{\vskip 0.6cm plus 0.3cm minus 0.3cm}
+\def\solutionskip{\vskip 1cm plus 0.5cm minus 0.5cm}
+\def\exercisewidth{0.8\textwidth}
+\def\solutionwidth{0.8\textwidth}
+\def\exercisecoloring{\color{blue}}
+\def\solutioncoloring{\color{red}}
+\def\textcoloring{\color{black}}
+
+\newenvironment{exercise-c26e158309505f61889ee3b749c66e08}
+{\stepcounter{exercise}\centering\textbf{\large \sc \exercisecoloring Exercise \arabic{assignment}.\arabic{exercise}}\nopagebreak\\[-0.1ex] \hfill\hfill\ovalbox\bgroup\begin{minipage}{\exercisewidth}\exercisecoloring}
+{\end{minipage}\egroup\hfill\hfill\exerciseskip}
+
+\newenvironment{solution-c26e158309505f61889ee3b749c66e08}
+{\centerline{\textbf{\large \sc \solutioncoloring \underline{Solution}}}\par \begingroup\textcoloring}
+{\hfill\hfill $\Box$ \endgroup\solutionskip}
+
+\def\mystar{{\color{red}$^\star$}} 
+\def\mydag{{\color{red}$^{\dagger}$}} 
+\newcommand\mylabel[2][]{\hypertarget{#2}{#1}}
+\newcommand\myref[2][\fbox{$\star$}]{\hyperlink{#2}{#1}}
+
+\def\mytitle{
+\begin{center}
+{\LARGE{Linear Systems Theory}} {
+    \Large \normalsize
+    \hspace*{12cm} Page \thepage\ of \pageref{LastPage}}\\
+    Questions with \mystar\ are not compulsory, 
+    while questions with \mydag\ are compulsory.\\
+    You need to solve at least one question in each assignment.\\
+    The more questions you answer, the more points you gain.
+\end{center}
+}
+
+\AddEverypageHook{
+\fancyhf{}%
+\mytitle
+}
+
+
+%%---You may add your own definitions here---
+%%──你自己定义的命令可以放在这里──
+\def\R{\mathcal{R}}
+\def\Q{\mathcal{Q}}
+\def\C{\mathcal{C}}
+\def\F{\mathcal{F}}
+\DeclareMathOperator{\Var}{Var}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+\begin{document}%
+% \begin{CJK*}{GBK}{kai}
+%-------版面的线框用页眉元素表现--------
+%---第一页与众不同---
+\newsavebox{\firstpgframe}
+\sbox{\firstpgframe}{\parbox{157mm}{
+\begin{center}
+\begin{minipage}[t][153mm][t]{157mm}
+\makebox[4mm][l]{\fbox{\parbox[t][153mm][t]{157mm}{\ }}}
+\end{minipage}
+\end{center}
+}}
+\vspace*{-6mm}
+
+\newsavebox{\zdx}
+\sbox{\zdx}
+	{\parbox{412pt}{
+% 	\centering \CJKfamily{kai}
+% 代~码
+(Code)\underline{\makebox[20mm][c]{\mycode}}%~学~号
+(ID)\underline{\makebox[30mm][c]{\myStudentNumber}}~~~%姓~名
+(Name)\underline{\makebox[30mm][c]{\myname}}
+
+\vspace{3mm}
+\dotfill{}%装
+\dotfill{}%订
+\dotfill{}%线
+\dotfill{}(Gutter)
+\dotfill{}
+}}
+\setlength{\marginparsep}{-10mm}
+\reversemarginpar
+\marginpar{
+\parbox{10mm}{\vspace{3cm}
+\rotatebox[origin=c]{90}{
+\usebox{\zdx}
+}
+}}
+
+%%Attach files (tex file;source code;figures;data file;rar archive;etc.)
+%%请在此用命令\myattach{file}插入你的各种源文件（tex文件，源程序，图片文件，数据文件，压缩包，等等）
+\myattach{\jobname.tex}
+\myattach{L05PageRank.sq}
+\vskip 1cm
+
+%%Main Text: Please provide your solutions here.
+%%正文：请在此查看你的作业，并填写你的答案。
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+\begin{enumerate}
+\item Please figure out the condition under which the equation $Ax=b$ has no solution, unique solution, and infinite many solutions, respectively. 
+Try to prove your results.
+\item Discuss similar problems for equation $w^T A=\lambda w^T$ with respect to row vector $w^T$ (called left eigenvector), where $A\in\R^{n\times n},\lambda\in\R$.
+\item Discuss similar problems for matrix equation $AXB=C$ with respect to matrix $X\in\R^{n\times n}$, where $A,B,C\in\R^{n\times n}$.
+\end{enumerate}
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ \\1:
+ \\If $rank(A)<rank(A|b)$, then there's no solution for $Ax=b$. 
+ \\Proof: Convert $[A|b]$ in to echelon by premultiplying invertible matrix P(e.g applying the corresponding elementary row operations) we obtain the last non-zero row denoted as $r_{err}$. Given $rank(A)<rank(A|b)$, the last element of $r_{err}$ must be the only non-zero element of it. Hence, there's no solution for $PAx=Pb$, thus there's no solution for $Ax=b$. 
+ \\If $rank(A)=rank(A|b)=n$ in which $n$ is the number of columns in $A$, then there's unique solution. 
+ \\Proof: $rank(A)=n$ suggests that the column vectors of A are linear independent. Furthermore, $rank(A|b)=rank(A)<n+1$ suggests that the columns vectors of $[A|b]$ are linear dependent. Hence, vector $b$ can be represented as linear combination of column vectors in $A$. And the combination must be unique. If that's not the case we have $x_{1}\neq x_{2}$ s.t. $Ax_{1}=Ax_{2}=b$, which suggests that $A(x_{1}-X_{2})=0$. Given that $rank(A)=n$, we have $x_{1}-X_{2}=0$, which is inconsistent with the assumption $x_{1}\neq x_{2}$. Hence, there's only one solution to $Ax=b$ if $rank(A)=rank(A|b)=n$. 
+ \\If $rank(A)=rank(A|b)<n$ in which $n$ is the number of columns in $A$, then there's infinite many solutions. 
+ \\Proof: We have proved that there's must be at least one solution given $rank(A|b)=rank(A)$. Assume that a solution is $Ax_{b}=b$, it is obvious that $A(x_{0}+x_{b})=b$, in which $x_{0}$ is a solution of $Ax=0$. This suggests that $x_{0}+x_{b}$ is another solution of $Ax=b$. 
+ given that $rank(A)<n$, there's infinite many solution for $Ax=0$, hence there's infinite many solutions for $Ax=b$. 
+ \\2:
+ $$w^{T} A=\lambda w^{T}$$
+ $$w^{T}(A-\lambda I)=0^{T}$$
+ $$(A-\lambda I)^{T}w=0$$
+ If $rank(A-\lambda I)=n$ in which n is the number of rows in $A-\lambda I$, then there's only one solution $w^{T}=0^{T}$. Otherwise, $rank(A-\lambda I)<n$, there's infinite many solutions. 
+ \\3:
+ \\
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+In the following statements,tell us whether each statement is true or false.
+\begin{enumerate}
+\item $V={(x,0,0)^{T}|x \in \R}$ is subspace of $\R^{3}$.
+\item $V={(0,0,0,0)^{T}}$ is subspace of $\R^{4}$.
+\item $V={(x,0,1)^{T}|x \in \R}$ is subspace of $\R^{3}$.
+\item $V={(0,x_{2},x_{3},\cdots,x_{n})^{T}|x_{i} \in \R,i=2,3,...n}$ is subspace of $\R^{n}$.
+\end{enumerate}
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ \\1: True. For $\forall V_{1}=(x_{1},0,0)^{T}\in V, V_{2}=(x_{2},0,0)^{T}\in V$, we have $V_{1}+V_{2}=(x_{1}+x_{2},0,0)^{T}\in V$. For $\forall V_{1}=(x_{1},0,0) \in V$, we have $kV_{1}=(kx_{1},0,0)\in V(k\in R)$. 
+ \\2: True. For $\forall V_{1},V_{2}\in V$, we have $v_{1}+v_{2}=(0,0,0,0)^{T}\in V$. For $\forall V_{1} \in V$, we have $kV_{1}=(0,0,0,0)^{T} \in V(k\in R)$. 
+ \\3: False. $\exists V_{1}=(x_{1},0,1)^{T}, V_{2}=(x_{2},0,1)^{T}$ s.t. $v_{1}+v_{2}=(x_{1}+x_{2},0,2)^{T}\notin V$. 
+ \\4: True. For $\forall V_{1}=(0,x_{12},x_{13},\cdots,x_{1n})^{T} \in V, V_{2}=(0,x_{22},x_{23},\cdots,x_{2n})^{T} \in V$, we have $v_{1}+v_{2}=V_{1}=(0,x_{12}+x_{22},x_{13}+x_{23},\cdots,x_{1n}+x_{2n})^{T} \in V$. For $\forall V_{1}=(0,x_{12},x_{13},\cdots,x_{1n})^{T} \in V$, we have $kV_{1}=(0,kx_{12},kx_{13},\cdots,kx_{1n})^{T} \in V(k\in R)$
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+ \begin{enumerate}
+\item Prove that $e^{A+B}$ equals to $e^{A}e^{B}$ when $AB=BA$. 
+\item Can you find some counterexamples such that $AB \ne BA$ but $e^{A+B} = e^{A}e^{B}$?
+\end{enumerate}
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ \\The operation $e^{M}$ is defined as $\sum_{n=0}^{\infty}\frac{1}{n!}M^{n}$, in which $M^{0}=I$. 
+ Then $e^{A+B}=\sum_{n=0}^{\infty}\frac{1}{n!}(A+B)^{n}$. 
+ Assume that $AB=BA=P$, then $(A+B)^{n}=\sum_{i=0}^{n}C_{n}^{i}A^{i}B^{n-i}$
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+Suppose webpage A is linked to by web pages T1, T2, ..., Tn, then page rank (importance level) of webpage A can be given by the PageRank formula
+$$PR(A)=(1-d)+d(\frac{PR(T1)}{C(T1)}+\frac{PR(T2)}{C(T2)}+\cdots+\frac{PR(Tn)}{C(Tn)})$$
+where 
+\begin{enumerate}
+\item PR(A) is webpage importance level of page A.
+\item $d$ is damping coefficient, whose value range is [0,1].
+\item PR(Ti) is web page importance level of page Ti, and Page Ti links to page A.
+\item C(Ti) is the numbers of linked page chained by Ti.
+\end{enumerate}
+Repeating the above formula for each webpage many times can generate stable page ranks for all web pages.
+Please program with sysquake to demonstrate the Google PageRank algorithm.
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ \\Inplement a set of functions shown as below: 
+ \lstinputlisting{L05PageRank.sq}
+ Run the following commands: 
+ \begin{verbatim}
+ M=randomRelationMatrix(10)
+ v=zeros(10,1)
+ v_new=pageRankUpdate(v,M,0.5,1e-4,200,false)
+ \end{verbatim}
+ We got following results: 
+ \begin{verbatim}
+ M =
+         0         0         1         1         0         0         0         1         1         0
+         1         0         1         0         1         0         0         0         0         1
+         0         0         0         0         0         0         0         0         0         0
+         1         0         0         0         1         0         0         0         0         1
+         0         0         0         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0         0         0         0
+         0         1         0         0         0         0         0         0         0         0
+         1         0         1         1         0         1         1         0         1         0
+         0         1         1         1         0         1         1         0         0         0
+         1         0         1         1         1         0         1         0         1         0
+v =
+         0
+         0
+         0
+         0
+         0
+         0
+         0
+         0
+         0
+         0
+v_new =
+    0.8543
+    0.9102
+     0.901
+    0.7883
+    0.8041
+    0.6213
+    0.6826
+    0.6056
+    0.7172
+    0.7428
+ \end{verbatim}
+ And the diagram of page rank update process is shown below:
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L05PageRankTest.png}
+ \end{figure}
+ Furthermore, test the enhanced page rank algorithm defined as $$PR(A)=\frac{1-d}{N}+d(\frac{PR(T1)}{C(T1)}+\frac{PR(T2)}{C(T2)}+\cdots+\frac{PR(Tn)}{C(Tn)})$$where $N$ is the total number of webpages. 
+ Run the following commands(keep the M generated before): 
+ \begin{verbatim}
+ v=zeros(10,1)
+ v_new=pageRankUpdate(v,M,0.5,1e-4,200,true)
+ \end{verbatim}
+ We got following results: 
+ \begin{verbatim}
+v =
+         0
+         0
+         0
+         0
+         0
+         0
+         0
+         0
+         0
+         0
+v_new =
+ 8.1667e-2
+ 8.8125e-2
+ 8.5642e-2
+ 7.5642e-2
+ 7.6979e-2
+ 6.1146e-2
+ 6.6528e-2
+ 5.9115e-2
+ 6.9184e-2
+ 7.1597e-2
+ \end{verbatim}
+ And the diagram of page rank update process is shown below:
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L05EnhancedPageRankTest.png}
+ \end{figure}
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+% \end{CJK*}
+\end{document}
