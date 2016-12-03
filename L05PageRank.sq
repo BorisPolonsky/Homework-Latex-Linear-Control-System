@@ -1,0 +1,43 @@
+functions
+{@
+function M=randomRelationMatrix(size_n)
+//M_ij=1 suggests the ith site is linked to jth site. 
+M=zeros(size_n,size_n);
+popularity=rand(size_n,1);//Define the likelihood that a paged be linked. 
+for i=1:size_n
+	for j=1:size_n
+		if i~=j&rand()<popularity(i,1)
+			M(i,j)=1;
+		end
+	end
+end
+
+function new_vPageRank=pageRankUpdate(vPageRank,AdjM,damp,epsilon,max_iter,modified)
+//vPageRank and new_vPageRank are column vectors. 
+//AdjM:Adjency Matrix
+//damp: damping factor ranged form 0 to 1
+//epsilon: convergence criterion:limit of MSE in each iteration. 
+//max_ter: max iteration limit
+v_log=vPageRank;
+for epoch=1:max_iter
+	if modified
+		new_vPageRank=ones(size(vPageRank,1),1)*(1-damp)/size(vPageRank,1);
+	else
+		new_vPageRank=ones(size(vPageRank,1),1)*(1-damp);
+	end
+	for i=1:size(vPageRank,1)
+		for j=1:size(vPageRank,1)
+			if AdjM(j,i)==1
+				new_vPageRank(i,1)=new_vPageRank(i,1)+damp*vPageRank(j,1)/sum(AdjM(j,:));
+			end
+		end
+	end
+	v_log=[v_log,new_vPageRank];
+	if norm(new_vPageRank-vPageRank,2)^2/size(vPageRank,1)<epsilon
+		break
+	end
+	vPageRank=new_vPageRank;
+end
+x=1:size(v_log,2);
+plot(x,v_log);
+@}
