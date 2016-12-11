@@ -1,0 +1,38 @@
+
+functions
+{@
+function plotAircraftState(Index_In)
+//Plot the response given a certain step input
+//In this implementation, we merge the distrubance into input, which yields a set of new matrice
+//representing the original system. 
+//The corresponding input of the new representation is [u_w;v_w;d_e;d_t]. 
+//u_w: velocity of wind along body axis
+//v_w: velocity of wind perpendicular to body axis
+//d_e: angle of elevator
+//d_t: thrust
+//Unlike matlab, sysquake does not seem to support multiple input for step(Ac,Bc,Cc,Dc)
+
+//Index_In: Determine the type the step input. 
+//	1 for u_w, 2 for v_w, 3 for d_e, 4 for d_t. 
+//The the color-response pairs are:
+//	red: u_w
+//	green: v_w
+//	blue: d_e
+//	black: d_t
+A=[-0.003,0.039,0,-0.322;
+-0.065,-0.319,7.74,0;
+0.020,-0.101,-0.429,0;
+0,0,1,0]
+B=[-A(:,1:2),[0.1,1;-0.18,-0.04;-1.16,0.598;0,0]];
+C=eye(4);
+D=zeros(4,4);
+color='rgbk';
+//for i=1:4
+//	step(A,B(:,Index_In),C(Index_Out(i,1),:),0,color(Index_Out(i,1)))
+//end
+//I don't know why it doesn't work. Hence I applied some crappy codes below:
+step(A,B(:,Index_In),C(1,:),0,color(1))
+step(A,B(:,Index_In),C(2,:),0,color(2))
+step(A,B(:,Index_In),C(3,:),0,color(3))
+step(A,B(:,Index_In),C(4,:),0,color(4))
+@}
