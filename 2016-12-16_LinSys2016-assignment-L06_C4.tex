@@ -144,6 +144,10 @@ extendedchars=true,breaklines=true,
 %%请在此用命令\myattach{file}插入你的各种源文件（tex文件，源程序，图片文件，数据文件，压缩包，等等）
 \myattach{\jobname.tex}
 \myattach{L06MockAircraftControl.sq}
+\myattach{L06TestImpulseResponse1.png}
+\myattach{L06TestImpulseResponse2.png}
+\myattach{L06TestImpulseResponse3.png}
+\myattach{L06TestImpulseResponse4.png}
 %\myattach{myprog01.sq}
 \vskip 1cm
 
@@ -167,8 +171,103 @@ In the lecture,we have introduced the longitudinal aircraft dynamics.There are t
  Please put your solution and/or program here ... \\
  Implement a set of functions as below:
  \lstinputlisting{L06MockAircraftControl.sq}
- 1:\\
- 2:
+ 1:Run the following commands:
+ \begin{verbatim}
+A=[-0.003,0.039,0,-0.322;
+-0.065,-0.319,7.74,0;
+0.020,-0.101,-0.429,0;
+0,0,1,0];
+eig(A)
+ \end{verbatim}
+ We obtain the following result:
+ \begin{verbatim}
+ ans =
+  -0.375 + 0.8818j
+  -0.375 - 0.8818j
+ -4.5786e-4 +6.7377e-2j
+ -4.5786e-4 -6.7377e-2j
+ \end{verbatim}
+ All eigenvalues are of negative real part, hence the system is stable. \\
+ 2:Run the following commands:
+ \begin{verbatim}
+A=[-0.003,0.039,0,-0.322;
+-0.065,-0.319,7.74,0;
+0.020,-0.101,-0.429,0;
+0,0,1,0];
+B=[-A(:,1:2),[0.1,1;-0.18,-0.04;-1.16,0.598;0,0]];
+C=[1,0,0,0;0,-1,0,7.74];
+D=zeros(2,2);
+[num,den]=ss2tf(A,B(:,1:2),C,D,1)
+[num,den]=ss2tf(A,B(:,1:2),C,D,2)
+\end{verbatim}
+We obtain the following results:
+\begin{verbatim}
+num =
+      3e-3  4.779e-3 4.2461e-3 4.1683e-3
+   -6.5e-2 -2.7885e-2   -0.1002 -4.0766e-17
+den =
+         1     0.751    0.9234 4.2461e-3 4.1683e-3
+num =
+   -3.9e-2 -1.6731e-2 -3.2522e-2 -3.296e-17
+    -0.319   -0.1403 -1.4981e-3 -4.1683e-3
+den =
+         1     0.751    0.9234 4.2461e-3 4.1683e-3
+\end{verbatim}
+Run the following command to plot impulse response to WIND GUST. 
+\begin{verbatim}
+plotSystemOutput(1,'impulse')
+plotSystemOutput(2,'impulse')
+\end{verbatim}
+We obtain the following results:\newpage
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L06TestImpulseResponse1.png}
+ \end{figure}
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L06TestImpulseResponse2.png}
+ \end{figure}
+ Note:\\
+ Curve in red: u\\
+ Curve in green: h\\
+3:Run the following commands:
+\begin{verbatim}
+A=[-0.003,0.039,0,-0.322;
+-0.065,-0.319,7.74,0;
+0.020,-0.101,-0.429,0;
+0,0,1,0];
+B=[-A(:,1:2),[0.1,1;-0.18,-0.04;-1.16,0.598;0,0]];
+C=[1,0,0,0;0,-1,0,7.74];
+D=zeros(2,2);
+[num,den]=ss2tf(A,B(:,3:4),C,D,1)
+[num,den]=ss2tf(A,B(:,3:4),C,D,1)
+\end{verbatim}
+We obtain the following results:
+\begin{verbatim}
+num =
+       0.1  6.778e-2    0.1122    0.1133
+      0.18  8.426e-2   -2.7204 3.4403e-3
+den =
+         1     0.751    0.9234 4.2461e-3 4.1683e-3
+num =
+         1    0.7464    0.9059 -6.2726e-2
+      4e-2  8.228e-2    1.5357     0.104
+den =
+         1     0.751    0.9234 4.2461e-3 4.1683e-3
+\end{verbatim}
+Run the following command to plot impulse response to ACTUATOR. 
+\begin{verbatim}
+plotSystemOutput(3,'impulse')
+plotSystemOutput(4,'impulse')
+\end{verbatim}
+We obtain the following results:\newpage
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L06TestImpulseResponse3.png}
+ \end{figure}
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L06TestImpulseResponse4.png}
+ \end{figure}
+ Note:\\
+ Curve in red: u\\
+ Curve in green: h\\
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
 
