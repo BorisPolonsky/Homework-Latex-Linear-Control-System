@@ -148,6 +148,7 @@ extendedchars=true,breaklines=true,
 \myattach{L06TestImpulseResponse2.png}
 \myattach{L06TestImpulseResponse3.png}
 \myattach{L06TestImpulseResponse4.png}
+\myattach{L06System.png}
 %\myattach{myprog01.sq}
 \vskip 1cm
 
@@ -285,7 +286,34 @@ In the lecture, we have introduced the masses,spings and dampers system.$u_{1}$ 
 
 
 \begin{solution-c26e158309505f61889ee3b749c66e08}
- Please put your solution and/or program here ... 
+ Please put your solution and/or program here ... \\
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L06System.png}
+ \end{figure}
+ Define $x_{1}$,$x_{2}$,$x_{3}$ as the position of the three objects. 
+ We obtain following equations from Newton's laws of motion:
+ $$u_{1}-2x_{1}+x_{2}-2\dot{x_{1}}+\dot{x_{2}}=\ddot{x_{1}}$$
+ $$u_{2}-u_{1}+x_{1}-2x_{2}+x_{3}+\dot{x_{1}}-2\dot{x_{2}}+\dot{x_{3}}=\ddot{x_{2}}$$
+ $$-u_{2}+x_{2}-2x_{3}+\dot{x_{2}}-2\dot{x_{3}}=\ddot{x_{3}}$$
+ By defining $x_{4}$,$x_{5}$,$x_{6}$ as $x_{4}=\dot{x_{1}}$,$x_{5}=\dot{x_{2}}$,$x_{4}=\dot{x_{3}}$, we obtain $\dot{x}=Ax+Bu$, in which: 
+ $$A=
+ \begin{bmatrix}
+0&0&0&1&0&0\\
+0&0&0&0&1&0\\
+0&0&0&0&0&1\\
+-2&1&0&-2&1&0\\
+1&-2&1&1&-2&1\\
+0&1&-2&0&1&-2\\
+\end{bmatrix},
+B=
+\begin{bmatrix}
+0&0\\
+0&0\\
+0&0\\
+1&0\\
+-1&1\\
+0&-1\\
+\end{bmatrix}$$
  %\lstinputlisting{myprog01.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
