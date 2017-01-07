@@ -2,7 +2,7 @@
 functions
 {@
 function plotAircraftState(Index_In,InputType)
-//Plot the response given a certain step input. 
+//Plot the response given a certain input. 
 //This simulates the state of aircraft by linearizing the system at a specific state. e.g. 747, level, 40000ft, 774ft/sec 
 //In this implementation, we merge the distrubance into input, which yields a set of new matrice
 //representing the original system. 
@@ -16,7 +16,7 @@ function plotAircraftState(Index_In,InputType)
 //v: velocity of aircraft perpendicular to body axis
 //q: pitch angle
 //theta: pitch rate
-//Index_In: Determine the type the step input. 
+//Index_In: Determine the type the input. 
 //	1 for u_w, 2 for v_w, 3 for d_e, 4 for d_t. 
 //InputType: 'step' for step response. 'impulse' for impulse response. 
 //The the color-response pairs are:
@@ -63,7 +63,7 @@ end
 
 
 function plotSystemOutput(Index_In,InputType)
-//Plot the response given a certain step input. 
+//Plot the response given a certain input. 
 //This simulates the state of aircraft by linearizing the system at a specific state. e.g. 747, level, 40000ft, 774ft/sec 
 //In this implementation, we merge the distrubance into input, which yields a set of new matrice
 //representing the original system. 
@@ -77,7 +77,7 @@ function plotSystemOutput(Index_In,InputType)
 //v: velocity of aircraft perpendicular to body axis
 //q: pitch angle
 //theta: pitch rate
-//Index_In: Determine the type the step input. 
+//Index_In: Determine the type the input. 
 //	1 for u_w, 2 for v_w, 3 for d_e, 4 for d_t. 
 //InputType: 'step' for step response. 'impulse' for impulse response. 
 //The the color-response pairs are:
