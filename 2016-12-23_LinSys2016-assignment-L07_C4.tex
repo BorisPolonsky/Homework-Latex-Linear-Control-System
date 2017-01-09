@@ -1,0 +1,227 @@
+%%Very Important!!! Please input your personal code, name and student number here!
+%%请在此输入你的个人代码、和姓名（请用拼音，不要用汉字）和学号。非常重要！！
+\def\mycode{MyCode}
+\def\myname{Author}
+\def\myStudentNumber{StudentNumber}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+% \documentclass{ctexart}\pagestyle{empty}
+\documentclass{article}\pagestyle{empty}
+\usepackage{latexsym,afterpage,amssymb,amsmath,amsthm,amsbsy,amsopn,amstext,amsxtra,amscd,color,multicol,bm,calc,lastpage,listings,indentfirst,ifpdf,CJK,CJKnumb,fancybox,fancyhdr,float,subfigure,times,longtable}%常用宏包
+\usepackage{everypage,lastpage}
+\usepackage{graphicx,hyperref}
+\usepackage[left=3cm,right=3cm]{geometry}
+\graphicspath{{./}{fig/}{theme0/}{pic15/}}
+
+\pdfinfo{
+/Keywords (Linear Systems Theory)
+/Title (2016-12-23_LinSys2016-assignment-L07_C4.tex)
+/Subject (Assignment-13,2016-12-23)
+/Creator (\mycode)
+/Author (\myname)
+/Producer (\mycode)
+}
+
+%%Load the package attachfile for attaching files in pdf files
+\usepackage{attachfile}
+\newcommand{\myattach}[2][\relax]{
+\IfFileExists{#2}{
+\attachfile{#2}{\ifx\relax#1\fbox{#2}\else\fbox{#1}\fi}
+}{}
+}
+
+
+%%Load the package listings for typesetting program codes
+\usepackage{listings,color}
+\lstdefinelanguage{Ox}{
+keywords={include,import,const,decl,return,if,else,elseif,for,while,switch,break,continue,goto,main},
+sensitive=true,commentstyle=\it\color{red},frame=TB,
+morecomment=[l]{//},morecomment=[s]{/*}{*/},numbers=left,numberstyle=\tiny,
+extendedchars=true,breaklines=true,
+}
+\lstdefinelanguage{sysquake}{
+keywords={include,includeifexists,info,use,useifexists,const,private,public,global,profile,error,return,if,else,elseif,end,for,while,repeat,until,switch,break,catch,continue,define,function,otherwise,functions,init,figure,draw,menu,plot,line,separator,beginmenu,endmenu,beginsubmenu,endsubmenu,data,dragin,dragout,embeddedfile,export,extension,help,idle,import,input,keydown,make,mousedown,mousedoubleclick,mousedrag,mousedragcont,mouseout,mouseover,mousescroll,mouseup,output,publichandler,resize,terminate,title,userinterface,variable,variables,version,assert,warning,varargin,varargout},
+sensitive=true,commentstyle=\it\color{red},frame=TB,
+morecomment=[l]{//},morecomment=[s]{/*}{*/},numbers=left,numberstyle=\tiny,
+extendedchars=true,breaklines=true,
+}
+\lstset{language=sysquake}
+
+
+\parindent=0pt
+\newcounter{assignment}\setcounter{assignment}{13}
+\newcounter{exercise}\setcounter{exercise}{0}
+\def\exerciseskip{\vskip 0.6cm plus 0.3cm minus 0.3cm}
+\def\solutionskip{\vskip 1cm plus 0.5cm minus 0.5cm}
+\def\exercisewidth{0.8\textwidth}
+\def\solutionwidth{0.8\textwidth}
+\def\exercisecoloring{\color{blue}}
+\def\solutioncoloring{\color{red}}
+\def\textcoloring{\color{black}}
+
+\newenvironment{exercise-c26e158309505f61889ee3b749c66e08}
+{\stepcounter{exercise}\centering\textbf{\large \sc \exercisecoloring Exercise \arabic{assignment}.\arabic{exercise}}\nopagebreak\\[-0.1ex] \hfill\hfill\ovalbox\bgroup\begin{minipage}{\exercisewidth}\exercisecoloring}
+{\end{minipage}\egroup\hfill\hfill\exerciseskip}
+
+\newenvironment{solution-c26e158309505f61889ee3b749c66e08}
+{\centerline{\textbf{\large \sc \solutioncoloring \underline{Solution}}}\par \begingroup\textcoloring}
+{\hfill\hfill $\Box$ \endgroup\solutionskip}
+
+\def\mystar{{\color{red}$^\star$}} 
+\def\mydag{{\color{red}$^{\dagger}$}} 
+\newcommand\mylabel[2][]{\hypertarget{#2}{#1}}
+\newcommand\myref[2][\fbox{$\star$}]{\hyperlink{#2}{#1}}
+
+\def\mytitle{
+\begin{center}
+{\LARGE{Linear Systems Theory}} {
+    \Large \normalsize
+    \hspace*{12cm} Page \thepage\ of \pageref{LastPage}}\\
+    Questions with \mystar\ are not compulsory, 
+    while questions with \mydag\ are compulsory.\\
+    You need to solve at least one question in each assignment.\\
+    The more questions you answer, the more points you gain.
+\end{center}
+}
+
+\AddEverypageHook{
+\fancyhf{}%
+\mytitle
+}
+
+
+%%---You may add your own definitions here---
+%%──你自己定义的命令可以放在这里──
+\def\R{\mathcal{R}}
+\def\Q{\mathcal{Q}}
+\def\C{\mathcal{C}}
+\def\F{\mathcal{F}}
+\DeclareMathOperator{\Var}{Var}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+\begin{document}%
+% \begin{CJK*}{GBK}{kai}
+%-------版面的线框用页眉元素表现--------
+%---第一页与众不同---
+\newsavebox{\firstpgframe}
+\sbox{\firstpgframe}{\parbox{157mm}{
+\begin{center}
+\begin{minipage}[t][153mm][t]{157mm}
+\makebox[4mm][l]{\fbox{\parbox[t][153mm][t]{157mm}{\ }}}
+\end{minipage}
+\end{center}
+}}
+\vspace*{-6mm}
+
+\newsavebox{\zdx}
+\sbox{\zdx}
+	{\parbox{412pt}{
+% 	\centering \CJKfamily{kai}
+% 代~码
+(Code)\underline{\makebox[20mm][c]{\mycode}}%~学~号
+(ID)\underline{\makebox[30mm][c]{\myStudentNumber}}~~~%姓~名
+(Name)\underline{\makebox[30mm][c]{\myname}}
+
+\vspace{3mm}
+\dotfill{}%装
+\dotfill{}%订
+\dotfill{}%线
+\dotfill{}(Gutter)
+\dotfill{}
+}}
+\setlength{\marginparsep}{-10mm}
+\reversemarginpar
+\marginpar{
+\parbox{10mm}{\vspace{3cm}
+\rotatebox[origin=c]{90}{
+\usebox{\zdx}
+}
+}}
+
+%%Attach files (tex file;source code;figures;data file;rar archive;etc.)
+%%请在此用命令\myattach{file}插入你的各种源文件（tex文件，源程序，图片文件，数据文件，压缩包，等等）
+\myattach{\jobname.tex}
+\myattach{myprog01.sq}
+\vskip 1cm
+
+%%Main Text: Please provide your solutions here.
+%%正文：请在此查看你的作业，并填写你的答案。
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+Please discuss the relatonship between $AA^{T}$ and $A^{T}A$.\\
+\textbf{Hints:}You can discuss the det,eigenvalues and the elements of matrix,and maybe you can suppose that A is scalar,column vector etc. \\
+
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+\textit{Regularization and SVD.} Let $A \in R^{n \times n}$ be full rank, with SVD
+$$A = \sum_{i=1}^{n}\sigma_{i}u_{i}v_{i}^{T}.$$
+(We consider the square, full rank case just for simplicity; it’s not too hard to consider the general nonsquare, non-full rank case.) Recall that the regularized approximate solution of $Ax = y$ is defined as the vector $x_{reg} \in R^{n}$ that minimizes the function
+$$\|Ax + y\|^{2} + \mu\|x\|^{2},$$
+where $\mu > 0$ is the regularization parameter. The regularized solution is a linear function of $y$, so it can be expressed as $x_{reg} = By$ where $B \in R^{n \times n}$.
+\begin{enumerate}
+    \item Express the SVD of $B$ in terms of the SVD of $A$. To be more specific, let
+    $$B = \sum_{i=1}^{n}\tilde{\sigma}_{i}\tilde{u}_{i}\tilde{v}_{i}^{T}.$$
+    denote the SVD of $B$. Express $\tilde{\sigma}_{i}, \tilde{u}_{i}, \tilde{v}_{i}$, for $i = 1, \ldots , n$, in terms of $\sigma_{i}, u_{i}, v_{i}, i = 1, \ldots , n$ (and, possibly, $\mu$). Recall the convention that $\tilde{\sigma}_{1} \ge \ldots \ge \tilde{\sigma}_{n}$.
+    \item Find the norm of $B$. Give your answer in terms of the SVD of $A$ (and $\mu$).
+    \item Find the worst-case relative inversion error, defined as
+    $$\textrm{max}_{y \ne 0}\frac{\|ABy - y\|}{\|y\|}.$$
+    Give your answer in terms of the SVD of $A$ (and $\mu$).
+    \end{enumerate}
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+Please find one application of SVD decomposition in your research area. 
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+Suppose B is any estimator such that $BA = I$,and $B_{ls} = A^{+} $is the least-squares estimator.Please show that the following conditions:
+\begin {enumerate}
+\item $B_{ls}^2\leq BB^{T} $
+\item $\epsilon_{ls}\in \epsilon$
+\item$\|B_{ls}\|\leq \|B \|$
+\end {enumerate}
+That is to say,the least-squares estimator gives the smallest uncertainty ellipsoid.
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... 
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+% \end{CJK*}
+\end{document}
