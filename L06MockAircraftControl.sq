@@ -1,4 +1,3 @@
-
 functions
 {@
 function plotAircraftState(Index_In,InputType)
