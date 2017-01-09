@@ -1,0 +1,32 @@
+functions
+{@
+function plotImpulseResponse(Index_In)
+//Plot the impulse response given a certain input. 
+//Index_In: Determine the type the step input. 
+//	1 for u_1, 2 for u_2, 3 for u_3
+//The states variables are:
+//x_1 to x_3: The offset of the objects.
+//x_4 to x_6: The velocities of the objedts.
+//The the color-response pairs are:
+//	red: x_1
+//	green: x_2
+//	blue: x_3
+
+//Note:Unlike matlab, sysquake does not seem to support multiple input for step(Ac,Bc,Cc,Dc)
+
+A=[0,0,0,1,0,0;
+0,0,0,0,1,0;
+0,0,0,0,0,1;
+-2,1,0,-2,1,0;
+1,-2,1,1,-2,1;
+0,1,-2,0,1,-2];
+B=[0,0;0,0;0,0;1,0;-1,1;0,-1];
+C=[eye(3),zeros(3,3)];
+D=zeros(3,3);
+color='rgb';
+//I don't know why it doesn't work using a "for loop", so lies below these crappy codes. 
+opt=responseset('Range',[0,20]);
+impulse(A,B(:,Index_In),C(1,:),0,color(1),opt)
+impulse(A,B(:,Index_In),C(2,:),0,color(2),opt)
+impulse(A,B(:,Index_In),C(3,:),0,color(3),opt)
+@}
