@@ -149,6 +149,9 @@ extendedchars=true,breaklines=true,
 \myattach{L06TestImpulseResponse3.png}
 \myattach{L06TestImpulseResponse4.png}
 \myattach{L06System.png}
+\myattach{L06AnotherSystem.sq}
+\myattach{L06System2TestImpulseResponse1.png}
+\myattach{L06System2TestImpulseResponse2.png}
 %\myattach{myprog01.sq}
 \vskip 1cm
 
@@ -314,6 +317,25 @@ B=
 -1&1\\
 0&-1\\
 \end{bmatrix}$$
+Implement a set of functions below: 
+\lstinputlisting{L06AnotherSystem.sq}
+Run the follwing commands:
+\begin{verbatim}%
+plotImpulseResponse(1)
+plotImpulseResponse(2)
+\end{verbatim}
+We obtain the results below:
+\newpage
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L06System2TestImpulseResponse1.png}
+ \end{figure}
+ \begin{figure}[h!]
+ \includegraphics[width=\linewidth]{L06System2TestImpulseResponse2.png}
+ \end{figure}
+ The first figure shows the impulse reponse of $u_{1}$, while the second one shows that of $u_{2}$. 
+ The curves in red, green, blue represents the offset of the three objects respectively (from left to right). \\
+ 2: From the first figure we can verify the fact that $u_{1}$ affects the third object less compaired with the other two as the peak of the impulse response shows. \\
+ 3: From the second figure we can verify the fact that $u_{2}$ affects the first object less compaired with the other two. 
  %\lstinputlisting{myprog01.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
