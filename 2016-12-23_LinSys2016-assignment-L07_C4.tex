@@ -1,8 +1,8 @@
 %%Very Important!!! Please input your personal code, name and student number here!
 %%请在此输入你的个人代码、和姓名（请用拼音，不要用汉字）和学号。非常重要！！
-\def\mycode{MyCode}
-\def\myname{Author}
-\def\myStudentNumber{StudentNumber}
+\def\mycode{}
+\def\myname{}
+\def\myStudentNumber{}
 
 %%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
 %%──以下部分请不要修改!──
@@ -161,6 +161,14 @@ Please discuss the relatonship between $AA^{T}$ and $A^{T}A$.\\
 
 \begin{solution-c26e158309505f61889ee3b749c66e08}
  Please put your solution and/or program here ... 
+ \begin{enumerate}
+\item they both have non-negative eigenvalues ($M=B^{T}B$ suggests that M is a positive definite (or positive semidefinite) matrix). 
+\item They have the same positive eigenvalues. 
+\item The positive eigenvalues are equal to the squares of the singulars of $A$
+\item $tr(A^{T}A)=tr(AA^{T})$
+\item $rank(A^{T}A)=rank(AA^{T})$
+\item If $det(A^{T}A)\neq 0$ and $det(AA^{T})\neq 0$, then $det(A^{T}A)=det(AA^{T})$
+\end{enumerate}
  %\lstinputlisting{myprog01.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
@@ -180,14 +188,26 @@ where $\mu > 0$ is the regularization parameter. The regularized solution is a l
     \item Find the norm of $B$. Give your answer in terms of the SVD of $A$ (and $\mu$).
     \item Find the worst-case relative inversion error, defined as
     $$\textrm{max}_{y \ne 0}\frac{\|ABy - y\|}{\|y\|}.$$
-    Give your answer in terms of the SVD of $A$ (and $\mu$).
+    Give your answer in terms of the SVD of $A$ (and $\mu$). 
     \end{enumerate}
 \end{exercise-c26e158309505f61889ee3b749c66e08}
 
 
 
 \begin{solution-c26e158309505f61889ee3b749c66e08}
- Please put your solution and/or program here ... 
+ Please put your solution and/or program here ... \\
+ Corrigendum: \\The function to be minimized should be:
+ $$J=\left\lVert Ax-y\right\rVert^{2}+\mu\left\lVert x\right\rVert^{2}$$
+ 1: To minimize the function, with equation $\frac{\partial{J}}{\partial{x}}=0$, we obtain:
+ $$x^{*}=(A^{T}A+\mu I)^{-1}A^{T}y$$
+ Hence, we have $B=(A^{T}A+\mu I)^{-1}A^{T}$. 
+ Given $A=\sum_{i=1}^{n}\sigma_{i}u_{i}v_{i}^{T}$, we obtain:
+ $$A^{T}A=\sum_{i=j}\sigma_{i}^{2}v_{i}v_{i}^{T}+\sum_{i\neq j}\sigma_{i}\sigma_{j}v_{i}u_{i}^{T}u_{j}v_{j}^{T}$$
+ Note that for $i \neq j$, $u_{i}^{T}u_{j}=0$, hence:
+ $$A^{T}A=\sum_{i=1}^{n}\sigma_{i}^{2}v_{i}v_{i}^{T}$$
+ $$B=\left(\sum_{i=1}^{n}\sigma_{i}^{2}v_{i}v_{i}^{T}+\mu I\right)^{-1}\left(\sum_{i=1}^{n}\sigma_{i}v_{i}u_{i}^{T}\right)$$
+ The lemma $$(A + UCV)^{-1} = X = A^{-1} - A^{-1}U(C^{-1} + VA^{-1}U)^{-1}VA^{-1}$$ may help decomposing the $A^{T}A+\mu I$ term. In fact, by applying n times its corollary:
+ $$(P + a a^{T})^{-1} = P^{-1} - \frac{1}{1 + a^{T}P^{-1}a}(P^{-1}a)(P^{-1}a)^{T}$$, where $P=P^{T}$, we may represent $\left(\sum_{i=1}^{n}\sigma_{i}^{2}v_{i}v_{i}^{T}+\mu I\right)^{-1}$ in terms of $\sigma_{i}$,$u_{i}$ and $v_{i}$.
  %\lstinputlisting{myprog01.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
@@ -200,8 +220,16 @@ Please find one application of SVD decomposition in your research area.
 \end{exercise-c26e158309505f61889ee3b749c66e08}
 
 \begin{solution-c26e158309505f61889ee3b749c66e08}
- Please put your solution and/or program here ... 
-
+ Please put your solution and/or program here ... \\
+ PCA: Principal component analysis.
+ Principal component analysis (PCA) is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components. (Source: Wikipedia)\\
+ The principal components transformation can also be associated with SVD. 
+ $$X=U\Sigma W^{T}$$
+ $$X^{T}X=W\Sigma^{2} W^{T}$$
+By applying SVD, the score matrix $T$ can be written as
+$$T=XW=U\Sigma W^{T}W=U\Sigma$$
+To `simplify` the transformation, we may only take into account the first L largest singular values and their singular vectors, hence we may obtain a truncated transformation:
+$$T_{L}=U_{L}\Sigma_{L}=XW_{L}$$
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
 
@@ -218,7 +246,28 @@ That is to say,the least-squares estimator gives the smallest uncertainty ellips
 \end{exercise-c26e158309505f61889ee3b749c66e08}
 
 \begin{solution-c26e158309505f61889ee3b749c66e08}
- Please put your solution and/or program here ... 
+ Please put your solution and/or program here ... \\
+ Corrigendum: \\The inequality should be:
+ $$B_{ls}B_{ls}^{T}\leq BB^{T}$$
+ 1:$A^{+}=(A^{T}A)^{-1}A^{T}$. 
+ Apply SVD to $A$
+ $$A=V\Sigma U^{*}$$
+ $$B_{ls}=U\Sigma^{-1}V^{T}$$
+ $$BB^{T}=(B+B_{ls}-B_{ls})(B+B_{ls}-B_{ls})^{T}$$
+ $$=B_{ls}B_{ls}^{T}+(B-B_{ls})B_{ls}^{T}+B_{ls}(B-B_{ls})^{T}+(B-B_{ls})(B-B_{ls})^{T}$$
+ From $$(B-B_{ls})A=(B-B_{ls})V\Sigma U^{T}=0$$
+ We obtain:
+ $$(B-B_{ls})V=0$$
+ Hence,
+ $$(B-B_{ls})B_{ls}^{T}=(B-B_{ls})(U\Sigma^{-1}V^{T})^{T}=((B-B_{ls})V)\Sigma^{-1}U^{T}=0$$
+ Finally:
+ $$BB^{T}-B_{ls}B_{ls}^{T}=(B-B_{ls})(B-B_{ls})^{T}$$
+ Note that $(B-B_{ls})(B-B_{ls})^{T}$ is positive semidefinite, we obtain $B_{ls}B_{ls}^{T}\leq BB^{T}$. \\
+ 2:$$y=Ax+v$$
+ $$BA=I$$
+ $$B_{ls}=(A^{T}A)^{-1}A^{T}$$
+ $$\varepsilon=\left\{Bv|\forall \lVert v \rVert\leq\alpha\right\}$$
+ $$\varepsilon_{ls}=\left\{B_{ls}v|\forall \lVert v \rVert\leq\alpha\right\}$$
  %\lstinputlisting{myprog01.sq}
 \end{solution-c26e158309505f61889ee3b749c66e08}
 
