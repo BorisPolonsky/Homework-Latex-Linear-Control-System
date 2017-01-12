@@ -2,7 +2,7 @@ title: Homework-latex-linear-control-system
 description: .tex and .sq file backups for the assignments of Prof. Ma's course-Linear Control System.
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-hacker
+theme: jekyll-theme-midnight
 
 gems:
   - jekyll-mentions
