@@ -1,0 +1,317 @@
+%%Very Important!!! Please input your personal code, name and student number here!
+%%请在此输入你的个人代码、和姓名（请用拼音，不要用汉字）和学号。非常重要！！
+\def\mycode{MyCode}
+\def\myname{Author}
+\def\myStudentNumber{StudentNumber}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+% \documentclass{ctexart}\pagestyle{empty}
+\documentclass{article}\pagestyle{empty}
+\usepackage{latexsym,afterpage,amssymb,amsmath,amsthm,amsbsy,amsopn,amstext,amsxtra,amscd,color,multicol,bm,calc,lastpage,listings,indentfirst,ifpdf,CJK,CJKnumb,fancybox,fancyhdr,float,subfigure,times,longtable}%常用宏包
+\usepackage{everypage,lastpage}
+\usepackage{graphicx,hyperref}
+\usepackage[left=3cm,right=3cm]{geometry}
+\graphicspath{{./}{fig/}{theme0/}{pic15/}}
+
+\pdfinfo{
+/Keywords (Linear Systems Theory)
+/Title (2016-12-30_LinSys2016-assignment-L08_C4.tex)
+/Subject (Assignment-14,2016-12-30)
+/Creator (\mycode)
+/Author (\myname)
+/Producer (\mycode)
+}
+
+%%Load the package attachfile for attaching files in pdf files
+\usepackage{attachfile}
+\newcommand{\myattach}[2][\relax]{
+\IfFileExists{#2}{
+\attachfile{#2}{\ifx\relax#1\fbox{#2}\else\fbox{#1}\fi}
+}{}
+}
+
+
+%%Load the package listings for typesetting program codes
+\usepackage{listings,color}
+\lstdefinelanguage{Ox}{
+keywords={include,import,const,decl,return,if,else,elseif,for,while,switch,break,continue,goto,main},
+sensitive=true,commentstyle=\it\color{red},frame=TB,
+morecomment=[l]{//},morecomment=[s]{/*}{*/},numbers=left,numberstyle=\tiny,
+extendedchars=true,breaklines=true,
+}
+\lstdefinelanguage{sysquake}{
+keywords={include,includeifexists,info,use,useifexists,const,private,public,global,profile,error,return,if,else,elseif,end,for,while,repeat,until,switch,break,catch,continue,define,function,otherwise,functions,init,figure,draw,menu,plot,line,separator,beginmenu,endmenu,beginsubmenu,endsubmenu,data,dragin,dragout,embeddedfile,export,extension,help,idle,import,input,keydown,make,mousedown,mousedoubleclick,mousedrag,mousedragcont,mouseout,mouseover,mousescroll,mouseup,output,publichandler,resize,terminate,title,userinterface,variable,variables,version,assert,warning,varargin,varargout},
+sensitive=true,commentstyle=\it\color{red},frame=TB,
+morecomment=[l]{//},morecomment=[s]{/*}{*/},numbers=left,numberstyle=\tiny,
+extendedchars=true,breaklines=true,
+}
+\lstset{language=sysquake}
+
+
+\parindent=0pt
+\newcounter{assignment}\setcounter{assignment}{14}
+\newcounter{exercise}\setcounter{exercise}{0}
+\def\exerciseskip{\vskip 0.6cm plus 0.3cm minus 0.3cm}
+\def\solutionskip{\vskip 1cm plus 0.5cm minus 0.5cm}
+\def\exercisewidth{0.8\textwidth}
+\def\solutionwidth{0.8\textwidth}
+\def\exercisecoloring{\color{blue}}
+\def\solutioncoloring{\color{red}}
+\def\textcoloring{\color{black}}
+
+\newenvironment{exercise-c26e158309505f61889ee3b749c66e08}
+{\stepcounter{exercise}\centering\textbf{\large \sc \exercisecoloring Exercise \arabic{assignment}.\arabic{exercise}}\nopagebreak\\[-0.1ex] \hfill\hfill\ovalbox\bgroup\begin{minipage}{\exercisewidth}\exercisecoloring}
+{\end{minipage}\egroup\hfill\hfill\exerciseskip}
+
+\newenvironment{solution-c26e158309505f61889ee3b749c66e08}
+{\centerline{\textbf{\large \sc \solutioncoloring \underline{Solution}}}\par \begingroup\textcoloring}
+{\hfill\hfill $\Box$ \endgroup\solutionskip}
+
+\def\mystar{{\color{red}$^\star$}} 
+\def\mydag{{\color{red}$^{\dagger}$}} 
+\newcommand\mylabel[2][]{\hypertarget{#2}{#1}}
+\newcommand\myref[2][\fbox{$\star$}]{\hyperlink{#2}{#1}}
+
+\def\mytitle{
+\begin{center}
+{\LARGE{Linear Systems Theory}} {
+    \Large \normalsize
+    \hspace*{12cm} Page \thepage\ of \pageref{LastPage}}\\
+    Questions with \mystar\ are not compulsory, 
+    while questions with \mydag\ are compulsory.\\
+    You need to solve at least one question in each assignment.\\
+    The more questions you answer, the more points you gain.
+\end{center}
+}
+
+\AddEverypageHook{
+\fancyhf{}%
+\mytitle
+}
+
+
+%%---You may add your own definitions here---
+%%──你自己定义的命令可以放在这里──
+\def\R{\mathcal{R}}
+\def\Q{\mathcal{Q}}
+\def\C{\mathcal{C}}
+\def\F{\mathcal{F}}
+\DeclareMathOperator{\Var}{Var}
+
+%%---DO NOT MODIFY THE FOLLOWING COMMANDS!---
+%%──以下部分请不要修改!──
+\begin{document}%
+% \begin{CJK*}{GBK}{kai}
+%-------版面的线框用页眉元素表现--------
+%---第一页与众不同---
+\newsavebox{\firstpgframe}
+\sbox{\firstpgframe}{\parbox{157mm}{
+\begin{center}
+\begin{minipage}[t][153mm][t]{157mm}
+\makebox[4mm][l]{\fbox{\parbox[t][153mm][t]{157mm}{\ }}}
+\end{minipage}
+\end{center}
+}}
+\vspace*{-6mm}
+
+\newsavebox{\zdx}
+\sbox{\zdx}
+	{\parbox{412pt}{
+% 	\centering \CJKfamily{kai}
+% 代~码
+(Code)\underline{\makebox[20mm][c]{\mycode}}%~学~号
+(ID)\underline{\makebox[30mm][c]{\myStudentNumber}}~~~%姓~名
+(Name)\underline{\makebox[30mm][c]{\myname}}
+
+\vspace{3mm}
+\dotfill{}%装
+\dotfill{}%订
+\dotfill{}%线
+\dotfill{}(Gutter)
+\dotfill{}
+}}
+\setlength{\marginparsep}{-10mm}
+\reversemarginpar
+\marginpar{
+\parbox{10mm}{\vspace{3cm}
+\rotatebox[origin=c]{90}{
+\usebox{\zdx}
+}
+}}
+
+%%Attach files (tex file;source code;figures;data file;rar archive;etc.)
+%%请在此用命令\myattach{file}插入你的各种源文件（tex文件，源程序，图片文件，数据文件，压缩包，等等）
+\myattach{\jobname.tex}
+\myattach{myprog01.sq}
+\vskip 1cm
+
+%%Main Text: Please provide your solutions here.
+%%正文：请在此查看你的作业，并填写你的答案。
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+For arbitrary SISO system, the identification model's the difference equation is $$y(k)=-\sum_{i=1}^n a_{i}y(k-i)+\sum_{i=1}^n b_{i}u(k-i)$$\\$u(k)$ and $y(k)$ are namely the input and output observable datas. \\$\theta$ is system parameter vector, $\theta=[a_{1},a_{2},\dots,a_{n},b_{1},b_{2},\dots,b_{n}]^{T}$\\The least square estimation of $\theta$ is $\hat{\theta}=(\Phi_{m}^{T}\Phi_{m})^{-1}\Phi_{m}^{T}Y_{m}$. 
+$$Y_{m}=\left[\begin{array}{c}
+y(1)\\
+y(2)\\
+\vdots\\
+y(m)
+\end{array}\right]$$
+$$\Phi_{m}= \left[\begin{array}{c}
+\varphi(1)\\
+\varphi(2)\\
+\vdots\\
+\varphi(m)
+\end{array}\right]=\begin{bmatrix}
+-y(0)&\dots&-y(1-n)&u(0)&\dots&u(1-n)\\
+-y(1)&\dots&-y(2-n)&u(1)&\dots&u(2-n)\\
+\vdots&\vdots&\vdots&\vdots&\vdots&\vdots\\
+-y(m-1)&\dots&-y(m-n)&u(m-1)&\dots&u(m-n)\\
+\end{bmatrix}
+$$
+The recursive least square can calculate $\hat\theta(k)$ by using $\hat\theta(k-1)$, please try to derive the recurisive form of $\hat{\theta}(k)$
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... \\
+ $$\Phi_{m}\theta=Y_{m}$$
+ $$\theta_{ls}=\hat{\theta}_{m}=(\Phi_{m}^{T}\Phi_{m})^{-1}\Phi_{m}^{T}Y_{m}$$
+ Denote $\Phi_{m}$ as:
+$$\Phi_{m}= \left[\begin{array}{c}
+\varphi(1)\\
+\varphi(2)\\
+\vdots\\
+\varphi(m)
+\end{array}\right]$$, we obtain:
+$$(\Phi_{m}^{T}\Phi_{m})^{-1}=\left(\sum_{i=1}^{m}\varphi^{T}(i)\varphi(i)\right)^{-1}$$
+
+Define $P_{k}$, $Q_{k}$ as $P_{k}=\Phi_{k}^{T}\Phi_{k}=\sum_{i=1}^{k}\varphi^{T}(i)\varphi(i)$, $Q_{k}=\Phi_{k}^{T}Y_{k}=\sum_{i=1}^{k}\varphi^{T}(i)y(i)$, $\hat{\theta}_{m}$ can be denoted as:
+$$\hat{\theta}_{m}=P_{m}^{-1}Q_{m}$$
+With the rank one update formula
+$$(P + a a^{T})^{-1} = P^{-1} - \frac{1}{1 + a^{T}P^{-1}a}(P^{-1}a)(P^{-1}a)^{T}$$, in which$P=P^{T}$, we obtain:
+$$P_{k}^{-1}=(P_{k-1}+\varphi^{T}(k)\varphi(k))^{-1}=P_{k-1}^{-1}-\frac{1}{\varphi(k)P^{k-1}\varphi^{T}(k)}(P_{k-1}^{-1}\varphi^{T}(k))(P_{k-1}^{-1}\varphi^{T}(k))^{T}$$
+With $Q_{k}=Q_{k-1}+\varphi^{T}(k)y(k)$, we obtain
+$$\hat{\theta}_{k}=P_{k}^{-1}Q_{k}=\left(P_{k-1}^{-1}-\frac{1}{\varphi(k)P^{k-1}\varphi^{T}(k)}(P_{k-1}^{-1}\varphi^{T}(k))(P_{k-1}^{-1}\varphi^{T}(k))^{T}\right)
+\left(Q_{k-1}+\varphi^{T}(k)y(k)\right)$$
+$$\hat{\theta}_{k}=\hat{\theta}_{k-1}+\Delta_{k-1}$$, in which:
+$$\Delta_{k-1}=P_{k-1}^{-1}\varphi^{T}(k)y(k)-\frac{1}{\varphi(k)P^{k-1}\varphi^{T}(k)}(P_{k-1}^{-1}\varphi^{T}(k))(P_{k-1}^{-1}\varphi^{T}(k))^{T}
+\left(Q_{k-1}+\varphi^{T}(k)y(k)\right)$$
+From $\hat{\theta}_{k}=\hat{\theta}_{k-1}+\Delta_{k-1}$ we know that if we calculate $\hat{\theta}_{k-1}$ from $P_{k-1}$ and $Q_{k-1}$, we obtain $\hat{\theta}_{k}$. To recursively calculate $\hat{\theta}_{m}$ we have to update $P_{k}^{-1}$ and $Q_{k}$ during each iteration as well. The recursive update equations are:
+$$P_{k}^{-1}=(P_{k-1}+\varphi^{T}(k)\varphi(k))^{-1}=P_{k-1}^{-1}-\frac{1}{\varphi(k)P^{k-1}\varphi^{T}(k)}(P_{k-1}^{-1}\varphi^{T}(k))(P_{k-1}^{-1}\varphi^{T}(k))^{T}$$
+$$Q_{k}=Q_{k-1}+\varphi^{T}(k)y(k)$$
+Thus, with these equations that update $\hat{\theta}$, $P^{-1}$ and $Q$ respectively, we obtain $\hat{\theta}_{m}$ recursively. 
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+Is the following Jordan-form dynamical equation controllable and observable?
+\begin{equation}%
+\begin{split}%
+\dot{x}&=\begin{bmatrix}%
+2 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 2 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 2 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 2 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 1 & 0\\
+0 & 0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix}x+\begin{bmatrix}%
+2 & 1 & 1\\
+2 & 1 & 1\\
+1 & 1 & 1\\
+3 & 2 & 1\\
+-1 & 0 & 0\\
+1 & 0 & 1\\
+1 & 0 & 0
+\end{bmatrix}
+u\\
+y&=\begin{bmatrix}%
+2 & 2 & 1 & 3 & -1 & 1 & 1\\
+1 & 1 & 1 & 2 & 0 & 0 & 0\\
+1 & 1 & 1 & 1 & 0 & 1 & 0
+\end{bmatrix}
+x
+\end{split}
+\end{equation}
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... \\
+ There are two distinct eigenvalues.
+ For $\lambda=2$, we form a new matrix consists of the the rows in $B$ that are'aligned with' the last rows of the corresponding Jordan blocks:
+$$M_{1}=\begin{bmatrix}
+2 & 1 & 1\\
+1 & 1 & 1\\
+3 & 2 & 1\\
+\end{bmatrix}$$
+$det(M_{1})=-1$, so $rank(M_{1})=3$, thus these three rows are linear independent. 
+For $\lambda=2$, we form a new matrix consists of the the rows in $B$ that are'aligned with' the last rows of the corresponding Jordan blocks:
+$$
+\begin{bmatrix}%
+1 & 0 & 1\\
+1 & 0 & 0
+\end{bmatrix}
+$$
+Apparently these two rows are linear independent. Hence, the system is controllable.
+For $\lambda=2$, form a new matrix consists of the the columns in $C$ that are'aligned with' the first columns of the corresponding Jordan blocks:
+$$
+M_{2}=\begin{bmatrix}%
+2 & 1 & 3\\
+1 & 1 & 2\\
+1 & 1 & 1 
+\end{bmatrix}
+$$
+$det(M_{2})=-1$, which suggest that $rank(M_{2})=3$, thus the three columns are linear independent. 
+For $\lambda=1$, form a new matrix consists of the the columns in $C$ that are'aligned with' the first columns of the corresponding Jordan blocks:
+$$
+\begin{bmatrix}
+-1 & 1\\
+0 & 0\\
+0 & 0
+\end{bmatrix} 
+$$
+It's clear that the two columns are linear dependent, hence the system is not observable.
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+$E\dot{x(t)} = Ax + Bu$ while E is singular matrix.Please discuss its reachability. 
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... \\
+ $$C_{r}=
+\begin{bmatrix}
+B&AB&A^{2}B&\cdots&A^{n-1}B
+\end{bmatrix},C_{r} \in \mathcal{R}^{n\times n}$$
+If $rank(C_{r})=n$, then the whole state space is reachable. 
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+\begin{exercise-c26e158309505f61889ee3b749c66e08}%
+\mydag
+Please search for Karl Johan Astrom and introduce something about him.
+\end{exercise-c26e158309505f61889ee3b749c66e08}
+
+\begin{solution-c26e158309505f61889ee3b749c66e08}
+ Please put your solution and/or program here ... \\
+ Karl is a notable Swedish control theorist, who has made contributions to the fields of control theory and control engineering, computer control and adaptive control. He is a Fellow of the IEEE, member of the Royal Swedish Academy of Sciences, Vice President of the Royal Swedish Academy of Engineering Sciences (IVA), and a foreign associate of the US National Academy of Engineering. He has received many awards for his academic achievements and has published many books on control theories. 
+ %\lstinputlisting{myprog01.sq}
+\end{solution-c26e158309505f61889ee3b749c66e08}
+
+
+% \end{CJK*}
+\end{document}
