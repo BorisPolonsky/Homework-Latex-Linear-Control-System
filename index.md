@@ -48,4 +48,4 @@ A simulation of another system in the assignment.
 
 ###### Note: 
 * Special thanks to Prof. Ma's MTeX toolkit. 
-* The .sq files are scripts that goes in [Sysquake](http://www.we-learn.net.cn/mathmhb/index.html). 
+* The .sq files are scripts that goes in [Sysquake](http://www.calerga.com/products/Sysquake/). 
