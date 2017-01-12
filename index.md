@@ -14,6 +14,7 @@ These are .tex and .sq file backups for the assignments of [Prof. Ma](http://www
 * [Assignment 6](https://github.com/BorisPolonsky/Homework-Latex-Linear-Control-System/blob/master/2016-12-16_LinSys2016-assignment-L06_C4.tex)
 * [Assignment 7](https://github.com/BorisPolonsky/Homework-Latex-Linear-Control-System/blob/master/2016-12-23_LinSys2016-assignment-L07_C4.tex)
 * [Assignment 8](https://github.com/BorisPolonsky/Homework-Latex-Linear-Control-System/blob/master/2016-12-30_LinSys2016-assignment-L08_C4.tex)
+
 ### .sq files
 
 #### Assignment 1
