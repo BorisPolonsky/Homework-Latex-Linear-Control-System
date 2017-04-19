@@ -34,9 +34,7 @@ B=[-A(:,1:2),[0.1,1;-0.18,-0.04;-1.16,0.598;0,0]];
 C=eye(4);
 D=zeros(4,4);
 
-//If you campare strings of different size in SysQuake, it will raise an error. 
-//That's why I judge size(InputType,2)==4 first. 
-if size(InputType,2)==4&&InputType=='step'
+if strcmp(InputType,'step')
 	color='rgbk';
 	//for i=1:4
 	//	step(A,B(:,Index_In),C(Index_Out(i,1),:),0,color(Index_Out(i,1)))
@@ -49,8 +47,7 @@ if size(InputType,2)==4&&InputType=='step'
 	step(A,B(:,Index_In),C(4,:),0,color(4),opt)
 end
 
-//Same reason for the redundancy in the following judgement. 
-if size(InputType,2)==7&&InputType=='impulse'
+if strcmp(InputType,'impulse')
 	color='rgbk';
 	//Same reasons for the crappy codes below. 
 	opt=responseset('Range',[0,10000]);
@@ -96,9 +93,7 @@ B=[-A(:,1:2),[0.1,1;-0.18,-0.04;-1.16,0.598;0,0]];
 C=[1,0,0,0;0,-1,0,7.74];
 D=zeros(2,4);
 
-//If you campare strings of different size in SysQuake, it will raise an error. 
-//That's why I judge size(InputType,2)==4 first. 
-if size(InputType,2)==4&&InputType=='step'
+if strcmp(InputType,'step')
 	color='rg';
 	//for i=1:4
 	//	step(A,B(:,Index_In),C(Index_Out(i,1),:),0,color(Index_Out(i,1)))
@@ -109,8 +104,7 @@ if size(InputType,2)==4&&InputType=='step'
 	step(A,B(:,Index_In),C(2,:),0,color(2),opt)
 end
 
-//Same reason for the redundancy in the following judgement. 
-if size(InputType,2)==7&&InputType=='impulse'
+if strcmp(InputType,'impulse')
 	color='rg';
 	//Same reasons for the crappy codes below. 
 	opt=responseset('Range',[0,10000]);
